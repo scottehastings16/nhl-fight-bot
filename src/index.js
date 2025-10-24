@@ -155,11 +155,23 @@ class NHLFightsBot {
 
     console.log(`      🆕 New fight detected!`);
 
+    // Get season for fight tracking (format: "2024-2025")
+    const season = this.getCurrentSeason();
+
+    // Get fight counts for players this season
+    const playerFightCount = storage.getPlayerFightCount(fight.player.id, season) + 1; // +1 for current fight
+    fight.player.fightCount = playerFightCount;
+
+    if (fight.isTwoManFight && fight.opponent) {
+      const opponentFightCount = storage.getPlayerFightCount(fight.opponent.id, season) + 1;
+      fight.opponent.fightCount = opponentFightCount;
+    }
+
     // Log fight details
     if (fight.isTwoManFight && fight.opponent) {
-      console.log(`         Players: ${fight.player.name} vs ${fight.opponent.name}`);
+      console.log(`         Players: ${fight.player.name} (${playerFightCount} fights) vs ${fight.opponent.name} (${fight.opponent.fightCount} fights)`);
     } else {
-      console.log(`         Player: ${fight.player.name}`);
+      console.log(`         Player: ${fight.player.name} (${playerFightCount} fights)`);
     }
     console.log(`         Time: Period ${fight.period}, ${fight.timeInPeriod}`);
     console.log(`         Score: ${fight.awayTeam} ${fight.awayScore}-${fight.homeScore} ${fight.homeTeam}`);
@@ -169,12 +181,35 @@ class NHLFightsBot {
       const tweetText = twitterClient.formatFightTweet(fight, game);
       await twitterClient.tweet(tweetText);
 
-      // Mark as processed
-      await storage.markProcessed(fightId);
+      // Mark as processed and update player stats
+      await storage.markProcessed(fightId, {
+        season: season,
+        player: fight.player,
+        opponent: fight.opponent
+      });
       console.log(`      ✅ Fight processed and tweeted (ID: ${fightId})`);
 
     } catch (error) {
       console.error(`      ❌ Error processing fight:`, error.message);
+    }
+  }
+
+  /**
+   * Get current NHL season string (e.g., "2024-2025")
+   * NHL season spans two calendar years (October-June)
+   * @returns {string} Season string
+   */
+  getCurrentSeason() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth() + 1; // 1-12
+
+    // If it's Oct-Dec, season is YYYY-YYYY+1
+    // If it's Jan-Sep, season is YYYY-1-YYYY
+    if (month >= 10) {
+      return `${year}-${year + 1}`;
+    } else {
+      return `${year - 1}-${year}`;
     }
   }
 
