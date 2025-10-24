@@ -66,13 +66,33 @@ class TwitterClient {
   }
 
   /**
+   * Get random fight heading with hockey terminology
+   * @returns {string} Random fight heading
+   */
+  getRandomFightHeading() {
+    const headings = [
+      '🥊 FIGHT! 🥊',
+      '🥊 DROPPING THE GLOVES! 🥊',
+      '🥊 TILT! 🥊',
+      '🥊 SCRAP! 🥊',
+      '🥊 THROWING HANDS! 🥊',
+      '🥊 DONNYBROOK! 🥊',
+      '🥊 HEAVYWEIGHT BOUT! 🥊',
+      '🥊 ROUGHING IT UP! 🥊',
+      '🥊 TIME TO DANCE! 🥊',
+      '🥊 GLOVES OFF! 🥊'
+    ];
+    return headings[Math.floor(Math.random() * headings.length)];
+  }
+
+  /**
    * Format a fight into a tweet
    * @param {Object} fight - Fight object
    * @param {Object} gameInfo - Additional game information
    * @returns {string} Formatted tweet text
    */
   formatFightTweet(fight, gameInfo = {}) {
-    let tweet = '🥊 FIGHT! 🥊\n\n';
+    let tweet = this.getRandomFightHeading() + '\n\n';
 
     // Players involved
     if (fight.isTwoManFight && fight.opponent) {
