@@ -10,7 +10,9 @@ const __dirname = path.dirname(__filename);
  */
 class Storage {
   constructor() {
-    this.filePath = path.join(__dirname, '..', 'fights.json');
+    // Use persistent volume in production (Railway), local file in development
+    const dataDir = process.env.DATA_DIR || path.join(__dirname, '..');
+    this.filePath = path.join(dataDir, 'fights.json');
     this.fights = new Set();
     this.playerStats = {}; // { season: { playerId: { name, team, fightCount } } }
     this.rivalries = {}; // { season: { "Player1-vs-Player2": { count, lastFight: date } } }
