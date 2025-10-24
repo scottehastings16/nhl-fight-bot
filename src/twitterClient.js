@@ -111,7 +111,7 @@ class TwitterClient {
     tweet += ` | ${fight.awayTeam} ${awayScore}-${homeScore} ${fight.homeTeam}\n\n`;
 
     // Hashtags
-    tweet += `#NHLFights #Hockey`;
+    tweet += `#NHLFights #NHL`;
 
     // Add team hashtags if available
     if (fight.player.team) {
@@ -143,31 +143,31 @@ class TwitterClient {
    */
   getTeamHashtag(abbrev) {
     const teamHashtags = {
-      'ANA': 'Ducks',
-      'BOS': 'Bruins',
-      'BUF': 'Sabres',
-      'CAR': 'Canes',
-      'CBJ': 'BlueJackets',
+      'ANA': 'FlyTogether',
+      'BOS': 'NHLBruins',
+      'BUF': 'SabreHood',
+      'CAR': 'RaiseUp',
+      'CBJ': 'CBJ',
       'CGY': 'Flames',
       'CHI': 'Blackhawks',
-      'COL': 'Avs',
+      'COL': 'GoAvsGo',
       'DAL': 'TexasHockey',
-      'DET': 'RedWings',
-      'EDM': 'Oilers',
-      'FLA': 'FlaPanthers',
+      'DET': 'LGRW',
+      'EDM': 'LetsGoOilers',
+      'FLA': 'TimeToHunt',
       'LAK': 'GoKingsGo',
-      'MIN': 'MNWild',
+      'MIN': 'mnwild',
       'MTL': 'GoHabsGo',
       'NJD': 'NJDevils',
-      'NSH': 'Preds',
+      'NSH': 'Smashville',
       'NYI': 'Isles',
       'NYR': 'NYR',
-      'OTT': 'Sens',
-      'PHI': 'Flyers',
+      'OTT': 'GoSensGo',
+      'PHI': 'LetsGoFlyers',
       'PIT': 'LetsGoPens',
       'SEA': 'SeaKraken',
-      'SJS': 'SJSharks',
-      'STL': 'STLBlues',
+      'SJS': 'TheFutureIsTeal',
+      'STL': 'stlblues',
       'TBL': 'GoBolts',
       'TOR': 'LeafsForever',
       'UTA': 'UtahHC',

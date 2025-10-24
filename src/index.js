@@ -16,6 +16,11 @@ class NHLFightsBot {
     this.pollInterval = parseInt(process.env.POLL_INTERVAL) || 60000; // Default 1 minute
     this.isRunning = false;
     this.monitoringInterval = null;
+
+    // Active hours configuration
+    this.activeHoursStart = process.env.ACTIVE_HOURS_START ? parseInt(process.env.ACTIVE_HOURS_START) : null;
+    this.activeHoursEnd = process.env.ACTIVE_HOURS_END ? parseInt(process.env.ACTIVE_HOURS_END) : null;
+    this.timezone = process.env.TIMEZONE || 'America/Chicago';
   }
 
   /**
@@ -73,10 +78,44 @@ class NHLFightsBot {
   }
 
   /**
+   * Check if current time is within active hours
+   * @returns {boolean}
+   */
+  isWithinActiveHours() {
+    // If no active hours configured, run 24/7
+    if (this.activeHoursStart === null || this.activeHoursEnd === null) {
+      return true;
+    }
+
+    const now = new Date();
+    const currentHour = parseInt(now.toLocaleString('en-US', {
+      timeZone: this.timezone,
+      hour: 'numeric',
+      hour12: false
+    }));
+
+    // Handle time ranges that span midnight (e.g., 16-6 means 4pm-6am)
+    if (this.activeHoursStart > this.activeHoursEnd) {
+      // Active from start to midnight, OR midnight to end
+      return currentHour >= this.activeHoursStart || currentHour < this.activeHoursEnd;
+    } else {
+      // Normal range within same day
+      return currentHour >= this.activeHoursStart && currentHour < this.activeHoursEnd;
+    }
+  }
+
+  /**
    * Check all active games for new fights
    */
   async checkForFights() {
     const timestamp = new Date().toLocaleString();
+
+    // Check if we're within active hours
+    if (!this.isWithinActiveHours()) {
+      console.log(`\n⏸️  [${timestamp}] Outside active hours (${this.activeHoursStart}:00-${this.activeHoursEnd}:00 ${this.timezone}). Sleeping...`);
+      return;
+    }
+
     console.log(`\n🔍 [${timestamp}] Checking for fights...`);
 
     try {
