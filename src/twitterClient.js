@@ -74,21 +74,11 @@ class TwitterClient {
   formatFightTweet(fight, gameInfo = {}) {
     let tweet = '🥊 FIGHT! 🥊\n\n';
 
-    // Helper to format player with fight count
-    const formatPlayer = (player) => {
-      let text = `${player.name} (${player.team})`;
-      if (player.fightCount && player.fightCount > 0) {
-        const ordinal = this.getOrdinal(player.fightCount);
-        text += ` - ${ordinal} fight`;
-      }
-      return text;
-    };
-
     // Players involved
     if (fight.isTwoManFight && fight.opponent) {
-      tweet += `${formatPlayer(fight.player)} vs ${formatPlayer(fight.opponent)}\n\n`;
+      tweet += `${fight.player.name} (${fight.player.team}) vs ${fight.opponent.name} (${fight.opponent.team})\n\n`;
     } else {
-      tweet += `${formatPlayer(fight.player)}\n\n`;
+      tweet += `${fight.player.name} (${fight.player.team})\n\n`;
     }
 
     // Game situation
@@ -124,20 +114,6 @@ class TwitterClient {
     if (periodType === 'OT') return 'OT';
     if (periodType === 'SO') return 'SO';
     return `P${period}`;
-  }
-
-  /**
-   * Convert number to ordinal (1st, 2nd, 3rd, etc.)
-   * @param {number} num - Number to convert
-   * @returns {string} Ordinal string
-   */
-  getOrdinal(num) {
-    const j = num % 10;
-    const k = num % 100;
-    if (j === 1 && k !== 11) return `${num}st`;
-    if (j === 2 && k !== 12) return `${num}nd`;
-    if (j === 3 && k !== 13) return `${num}rd`;
-    return `${num}th`;
   }
 
   /**
