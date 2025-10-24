@@ -137,6 +137,35 @@ class TwitterClient {
   }
 
   /**
+   * Format daily leaderboard tweet
+   * @param {Object} stats - Statistics object
+   * @returns {string} Formatted tweet text
+   */
+  formatLeaderboardTweet(stats) {
+    const { season, topFighters, topRivalries, weekCount } = stats;
+
+    let tweet = '📊 SEASON LEADERBOARD\n\n';
+
+    // Top 5 Fighters
+    tweet += '🥊 TOP FIGHTERS:\n';
+    topFighters.slice(0, 5).forEach((fighter, index) => {
+      tweet += `${index + 1}. ${fighter.name} (${fighter.team}) ${fighter.fightCount}\n`;
+    });
+
+    // Top 3 Team Rivalries
+    tweet += '\n🔥 TOP RIVALRIES:\n';
+    topRivalries.slice(0, 3).forEach((rivalry, index) => {
+      tweet += `${index + 1}. ${rivalry.teams} ${rivalry.fights}\n`;
+    });
+
+    // This week's count
+    tweet += `\n📅 Week: ${weekCount}\n\n`;
+    tweet += '#NHLFights #NHL';
+
+    return tweet;
+  }
+
+  /**
    * Get team hashtag from abbreviation
    * @param {string} abbrev - Team abbreviation
    * @returns {string} Team hashtag

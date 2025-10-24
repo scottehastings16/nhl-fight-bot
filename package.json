@@ -8,11 +8,18 @@
     "start": "node src/index.js",
     "dev": "node --watch src/index.js"
   },
-  "keywords": ["nhl", "twitter", "bot", "fights", "hockey"],
+  "keywords": [
+    "nhl",
+    "twitter",
+    "bot",
+    "fights",
+    "hockey"
+  ],
   "author": "",
   "license": "MIT",
   "dependencies": {
     "dotenv": "^16.4.5",
+    "node-cron": "^4.2.1",
     "node-fetch": "^3.3.2",
     "twitter-api-v2": "^1.17.2"
   }

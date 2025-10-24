@@ -1,8 +1,9 @@
 import dotenv from 'dotenv';
+import cron from 'node-cron';
 import nhlApi from './nhlApi.js';
 import fightDetector from './fightDetector.js';
 import twitterClient from './twitterClient.js';
-import storage from './storage.js';
+import storage from './storage-enhanced.js';
 
 // Load environment variables
 dotenv.config();
@@ -21,6 +22,10 @@ class NHLFightsBot {
     this.activeHoursStart = process.env.ACTIVE_HOURS_START ? parseInt(process.env.ACTIVE_HOURS_START) : null;
     this.activeHoursEnd = process.env.ACTIVE_HOURS_END ? parseInt(process.env.ACTIVE_HOURS_END) : null;
     this.timezone = process.env.TIMEZONE || 'America/Chicago';
+
+    // Daily leaderboard configuration
+    this.dailyLeaderboardEnabled = process.env.DAILY_LEADERBOARD_ENABLED !== 'false';
+    this.dailyLeaderboardTime = process.env.DAILY_LEADERBOARD_TIME || '12:00'; // Default noon
   }
 
   /**
@@ -41,6 +46,12 @@ class NHLFightsBot {
     });
 
     console.log(`⏱️  Poll interval: ${this.pollInterval / 1000} seconds\n`);
+
+    // Set up daily leaderboard schedule
+    if (this.dailyLeaderboardEnabled) {
+      this.setupDailyLeaderboard();
+    }
+
     console.log('─'.repeat(60));
   }
 
@@ -208,12 +219,85 @@ class NHLFightsBot {
       const tweetText = twitterClient.formatFightTweet(fight, game);
       await twitterClient.tweet(tweetText);
 
-      // Mark as processed
-      await storage.markProcessed(fightId);
+      // Get current season
+      const season = this.getCurrentSeason();
+
+      // Mark as processed with enhanced data for stats tracking
+      await storage.markProcessed(fightId, {
+        season: season,
+        player: fight.player,
+        opponent: fight.opponent,
+        homeTeam: fight.homeTeam,
+        awayTeam: fight.awayTeam
+      });
       console.log(`      ✅ Fight processed and tweeted (ID: ${fightId})`);
 
     } catch (error) {
       console.error(`      ❌ Error processing fight:`, error.message);
+    }
+  }
+
+  /**
+   * Get current NHL season (e.g., "2025-2026")
+   * @returns {string} Season string
+   */
+  getCurrentSeason() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth() + 1;
+
+    if (month >= 10) {
+      return `${year}-${year + 1}`;
+    } else {
+      return `${year - 1}-${year}`;
+    }
+  }
+
+  /**
+   * Set up daily leaderboard schedule
+   */
+  setupDailyLeaderboard() {
+    const [hour, minute] = this.dailyLeaderboardTime.split(':').map(Number);
+
+    // Create cron expression (minute hour * * *)
+    const cronExpression = `${minute} ${hour} * * *`;
+
+    console.log(`📅 Daily leaderboard scheduled for ${this.dailyLeaderboardTime} ${this.timezone}`);
+
+    // Schedule the job
+    cron.schedule(cronExpression, async () => {
+      console.log('\n📊 Running scheduled daily leaderboard...');
+      await this.postDailyLeaderboard();
+    }, {
+      timezone: this.timezone
+    });
+  }
+
+  /**
+   * Post daily leaderboard tweet
+   */
+  async postDailyLeaderboard() {
+    try {
+      const season = this.getCurrentSeason();
+
+      // Gather statistics
+      const topFighters = storage.getTopFighters(season, 10);
+      const topRivalries = storage.getTopTeamRivalries(season, 10);
+      const weekCount = storage.getThisWeekCount(season);
+
+      // Format and send tweet
+      const tweetText = twitterClient.formatLeaderboardTweet({
+        season,
+        topFighters,
+        topRivalries,
+        weekCount
+      });
+
+      await twitterClient.tweet(tweetText);
+      console.log('✅ Daily leaderboard posted successfully\n');
+
+    } catch (error) {
+      console.error('❌ Error posting daily leaderboard:', error.message);
     }
   }
 
