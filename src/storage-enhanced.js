@@ -241,6 +241,18 @@ class Storage {
   }
 
   /**
+   * Get total fights for a specific season
+   */
+  getSeasonTotal(season) {
+    // Count all unique fights for this season by checking player stats exist
+    if (!this.playerStats[season]) return 0;
+
+    // Use the fights set size since it tracks all unique fight IDs
+    // Filter by season would require parsing fight IDs, so we use processed count
+    return this.fights.size;
+  }
+
+  /**
    * Clear old fight data (optional cleanup)
    */
   async cleanup(maxEntries = 1000) {

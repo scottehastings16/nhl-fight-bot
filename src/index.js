@@ -284,13 +284,15 @@ class NHLFightsBot {
       const topFighters = storage.getTopFighters(season, 10);
       const topRivalries = storage.getTopTeamRivalries(season, 10);
       const weekCount = storage.getThisWeekCount(season);
+      const seasonTotal = storage.getSeasonTotal(season);
 
       // Format and send tweet
       const tweetText = twitterClient.formatLeaderboardTweet({
         season,
         topFighters,
         topRivalries,
-        weekCount
+        weekCount,
+        seasonTotal
       });
 
       await twitterClient.tweet(tweetText);

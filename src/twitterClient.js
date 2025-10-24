@@ -142,7 +142,7 @@ class TwitterClient {
    * @returns {string} Formatted tweet text
    */
   formatLeaderboardTweet(stats) {
-    const { season, topFighters, topRivalries, weekCount } = stats;
+    const { season, topFighters, topRivalries, weekCount, seasonTotal } = stats;
 
     let tweet = '📊 SEASON LEADERBOARD\n\n';
 
@@ -158,8 +158,8 @@ class TwitterClient {
       tweet += `${index + 1}. ${rivalry.teams} ${rivalry.fights}\n`;
     });
 
-    // This week's count
-    tweet += `\n📅 Week: ${weekCount}\n\n`;
+    // Stats summary
+    tweet += `\n📅 Week: ${weekCount} | Season: ${seasonTotal}\n\n`;
     tweet += '#NHLFights #NHL';
 
     return tweet;
