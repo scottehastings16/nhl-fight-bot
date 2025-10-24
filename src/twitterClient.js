@@ -141,15 +141,28 @@ class TwitterClient {
    * @param {Object} stats - Statistics object
    * @returns {string} Formatted tweet text
    */
+  /**
+   * Abbreviate first name (e.g., "Ryan Reaves" → "R. Reaves")
+   */
+  abbreviateName(fullName) {
+    const parts = fullName.split(' ');
+    if (parts.length < 2) return fullName;
+
+    const firstName = parts[0];
+    const lastName = parts.slice(1).join(' ');
+    return `${firstName.charAt(0)}. ${lastName}`;
+  }
+
   formatLeaderboardTweet(stats) {
     const { season, topFighters, topRivalries, weekCount, seasonTotal } = stats;
 
     let tweet = '📊 SEASON LEADERBOARD\n\n';
 
-    // Top 5 Fighters
+    // Top 5 Fighters (with abbreviated first names)
     tweet += '🥊 TOP FIGHTERS:\n';
     topFighters.slice(0, 5).forEach((fighter, index) => {
-      tweet += `${index + 1}. ${fighter.name} (${fighter.team}) ${fighter.fightCount}\n`;
+      const shortName = this.abbreviateName(fighter.name);
+      tweet += `${index + 1}. ${shortName} (${fighter.team}) ${fighter.fightCount}\n`;
     });
 
     // Top 3 Team Rivalries
