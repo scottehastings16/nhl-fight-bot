@@ -132,7 +132,10 @@ class FightDetector {
 
         grouped.push({
           ...fight,
-          opponent: matchingFight.player,
+          opponent: {
+            ...matchingFight.player,
+            eventId: matchingFight.eventId  // Include eventId for duplicate detection
+          },
           isTwoManFight: true
         });
       } else {
@@ -150,10 +153,16 @@ class FightDetector {
 
   /**
    * Create a unique identifier for a fight to prevent duplicates
+   * For two-man fights, use the lower eventId to ensure both players map to same ID
    * @param {Object} fight - Fight object
    * @returns {string} Unique fight ID
    */
   createFightId(fight) {
+    if (fight.isTwoManFight && fight.opponent && fight.opponent.eventId) {
+      // Use the lower eventId for two-man fights to ensure consistent ID
+      const lowerEventId = Math.min(fight.eventId, fight.opponent.eventId);
+      return `${fight.gameId}-${lowerEventId}`;
+    }
     return `${fight.gameId}-${fight.eventId}`;
   }
 }
