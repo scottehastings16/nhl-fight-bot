@@ -190,6 +190,33 @@ class NHLFightsBot {
   }
 
   /**
+   * Calculate elapsed time since fight occurred
+   * @param {Object} fight - Fight object
+   * @param {Object} game - Game object
+   * @returns {number} Minutes elapsed since fight
+   */
+  getFightAge(fight, game) {
+    // Estimate fight time based on period and time in period
+    // This is approximate but good enough for filtering old fights
+    const periodMinutes = (fight.period - 1) * 20; // Each period is 20 min
+    const [minutes, seconds] = fight.timeInPeriod.split(':').map(Number);
+    const fightMinute = periodMinutes + minutes;
+
+    // Get current game time from game state
+    const currentPeriod = game.periodDescriptor?.number || 1;
+    const currentPeriodMinutes = (currentPeriod - 1) * 20;
+
+    // Parse current time in period if available
+    let currentMinute = currentPeriodMinutes;
+    if (game.clock?.timeRemaining) {
+      const [remMin, remSec] = game.clock.timeRemaining.split(':').map(Number);
+      currentMinute = currentPeriodMinutes + (20 - remMin);
+    }
+
+    return currentMinute - fightMinute;
+  }
+
+  /**
    * Process a detected fight (check if new, tweet if needed)
    * @param {Object} fight - Fight object
    * @param {Object} game - Game object
@@ -197,9 +224,15 @@ class NHLFightsBot {
   async processFight(fight, game) {
     const fightId = fightDetector.createFightId(fight);
 
+    // Skip fights older than 10 minutes (avoid re-processing old fights in active games)
+    const fightAge = this.getFightAge(fight, game);
+    if (fightAge > 10) {
+      return;
+    }
+
     // Check if we've already processed this fight
     if (storage.hasProcessed(fightId)) {
-      console.log(`      ⏭️  Fight already processed (ID: ${fightId})`);
+      // Silently skip already processed fights (no log spam)
       return;
     }
 
