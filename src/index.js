@@ -26,6 +26,10 @@ class NHLFightsBot {
     // Daily leaderboard configuration
     this.dailyLeaderboardEnabled = process.env.DAILY_LEADERBOARD_ENABLED !== 'false';
     this.dailyLeaderboardTime = process.env.DAILY_LEADERBOARD_TIME || '12:00'; // Default noon
+
+    // Track when we first see each fight (for time-based filtering)
+    this.fightFirstSeen = new Map(); // fightId -> timestamp
+    this.fightTimeWindow = 5 * 60 * 1000; // 5 minutes in milliseconds
   }
 
   /**
@@ -190,49 +194,31 @@ class NHLFightsBot {
   }
 
   /**
-   * Calculate elapsed time since fight occurred
-   * @param {Object} fight - Fight object
-   * @param {Object} game - Game object
-   * @returns {number} Minutes elapsed since fight
-   */
-  getFightAge(fight, game) {
-    // Estimate fight time based on period and time in period
-    // This is approximate but good enough for filtering old fights
-    const periodMinutes = (fight.period - 1) * 20; // Each period is 20 min
-    const [minutes, seconds] = fight.timeInPeriod.split(':').map(Number);
-    const fightMinute = periodMinutes + minutes;
-
-    // Get current game time from game state
-    const currentPeriod = game.periodDescriptor?.number || 1;
-    const currentPeriodMinutes = (currentPeriod - 1) * 20;
-
-    // Parse current time in period if available
-    let currentMinute = currentPeriodMinutes;
-    if (game.clock?.timeRemaining) {
-      const [remMin, remSec] = game.clock.timeRemaining.split(':').map(Number);
-      currentMinute = currentPeriodMinutes + (20 - remMin);
-    }
-
-    return currentMinute - fightMinute;
-  }
-
-  /**
    * Process a detected fight (check if new, tweet if needed)
    * @param {Object} fight - Fight object
    * @param {Object} game - Game object
    */
   async processFight(fight, game) {
     const fightId = fightDetector.createFightId(fight);
-
-    // Skip fights older than 10 minutes (avoid re-processing old fights in active games)
-    const fightAge = this.getFightAge(fight, game);
-    if (fightAge > 10) {
-      return;
-    }
+    const now = Date.now();
 
     // Check if we've already processed this fight
     if (storage.hasProcessed(fightId)) {
       // Silently skip already processed fights (no log spam)
+      return;
+    }
+
+    // Track when we first see this fight
+    if (!this.fightFirstSeen.has(fightId)) {
+      this.fightFirstSeen.set(fightId, now);
+    }
+
+    // Check if fight is outside the time window (older than 5 minutes since first seen)
+    const firstSeenTime = this.fightFirstSeen.get(fightId);
+    const timeSinceFirstSeen = now - firstSeenTime;
+
+    if (timeSinceFirstSeen > this.fightTimeWindow) {
+      // Fight is too old, stop checking it
       return;
     }
 
