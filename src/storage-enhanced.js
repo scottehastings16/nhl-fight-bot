@@ -63,13 +63,38 @@ class Storage {
   }
 
   /**
-   * Get week string (e.g., "2025-W42")
+   * Get week string (e.g., "2025-W42") using Sunday as start of week
    */
   getWeekString(date = new Date()) {
     const year = date.getFullYear();
     const firstDay = new Date(year, 0, 1);
-    const days = Math.floor((date - firstDay) / (24 * 60 * 60 * 1000));
-    const week = Math.ceil((days + firstDay.getDay() + 1) / 7);
+
+    // Find the Sunday of the week containing this date
+    // Normalize to midnight to avoid time-of-day issues
+    const dateCopy = new Date(date);
+    dateCopy.setHours(0, 0, 0, 0);
+    const dayOfWeek = dateCopy.getDay(); // 0=Sunday, 1=Monday, etc.
+    const sundayOfWeek = new Date(dateCopy);
+    sundayOfWeek.setDate(dateCopy.getDate() - dayOfWeek); // Go back to Sunday
+
+    // Get the first Sunday of the year (or Jan 1 if it's a Sunday)
+    const firstSunday = new Date(firstDay);
+    firstSunday.setHours(0, 0, 0, 0);
+    const firstDayOfWeek = firstDay.getDay();
+    if (firstDayOfWeek !== 0) {
+      // Jan 1 is not Sunday, find first Sunday
+      firstSunday.setDate(firstDay.getDate() + (7 - firstDayOfWeek));
+    }
+
+    // If the Sunday of this week is before first Sunday, it's week 1
+    if (sundayOfWeek < firstSunday) {
+      return `${year}-W01`;
+    }
+
+    // Calculate weeks since first Sunday
+    const daysSinceFirstSunday = Math.floor((sundayOfWeek - firstSunday) / (24 * 60 * 60 * 1000));
+    const week = Math.floor(daysSinceFirstSunday / 7) + 2; // +2 because first Sunday is week 2
+
     return `${year}-W${week.toString().padStart(2, '0')}`;
   }
 
@@ -86,7 +111,14 @@ class Storage {
 
     const season = fightData.season;
     // Use the fight's actual date if provided, otherwise use current date
-    const fightDate = fightData.date ? new Date(fightData.date) : new Date();
+    // Parse date as local time (YYYY-MM-DD format) to avoid timezone issues
+    let fightDate;
+    if (fightData.date) {
+      const [year, month, day] = fightData.date.split('-').map(Number);
+      fightDate = new Date(year, month - 1, day); // month is 0-indexed
+    } else {
+      fightDate = new Date();
+    }
     const weekString = this.getWeekString(fightDate);
 
     // Initialize season data
@@ -120,10 +152,10 @@ class Storage {
       }
       this.playerStats[season][fightData.opponent.id].fightCount++;
 
-      // Update player rivalry
+      // Update player rivalry (using player IDs for reliability)
       const rivalryKey = this.getRivalryKey(
-        fightData.player.name,
-        fightData.opponent.name
+        fightData.player.id,
+        fightData.opponent.id
       );
 
       if (!this.rivalries[season][rivalryKey]) {
@@ -146,6 +178,9 @@ class Storage {
     // Update weekly stats
     this.weeklyStats[season][weekString].count++;
     this.weeklyStats[season][weekString].fights.push({
+      playerIds: fightData.opponent ?
+        [fightData.player.id, fightData.opponent.id] :
+        [fightData.player.id],
       players: fightData.opponent ?
         `${fightData.player.name} vs ${fightData.opponent.name}` :
         fightData.player.name,
@@ -156,10 +191,10 @@ class Storage {
   }
 
   /**
-   * Get rivalry key (alphabetically sorted to avoid duplicates)
+   * Get rivalry key using player IDs (alphabetically sorted to avoid duplicates)
    */
-  getRivalryKey(player1, player2) {
-    return [player1, player2].sort().join('-vs-');
+  getRivalryKey(player1Id, player2Id) {
+    return [player1Id, player2Id].sort().join('-vs-');
   }
 
   /**
@@ -170,10 +205,10 @@ class Storage {
   }
 
   /**
-   * Check rivalry count between two players
+   * Check rivalry count between two players using player IDs
    */
-  getRivalryCount(player1, player2, season) {
-    const key = this.getRivalryKey(player1, player2);
+  getRivalryCount(player1Id, player2Id, season) {
+    const key = this.getRivalryKey(player1Id, player2Id);
     return this.rivalries[season]?.[key]?.count || 0;
   }
 
