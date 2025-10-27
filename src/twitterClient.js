@@ -100,6 +100,16 @@ class TwitterClient {
     const player2IsCaptain = fight.opponent ? captainsManager.isCaptain(fight.opponent.id) : false;
     const hasCaptain = player1IsCaptain || player2IsCaptain;
 
+    // Log captain detection
+    if (player1IsCaptain) {
+      const team = captainsManager.getCaptainTeam(fight.player.id);
+      console.log(`      🎖️  Captain detected: ${fight.player.name} (${team})`);
+    }
+    if (player2IsCaptain) {
+      const team = captainsManager.getCaptainTeam(fight.opponent.id);
+      console.log(`      🎖️  Captain detected: ${fight.opponent.name} (${team})`);
+    }
+
     // Players involved (abbreviate names if a captain is involved)
     const player1Name = hasCaptain ? this.abbreviateName(fight.player.name) : fight.player.name;
     const player2Name = fight.opponent && hasCaptain ? this.abbreviateName(fight.opponent.name) : (fight.opponent ? fight.opponent.name : '');

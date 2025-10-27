@@ -223,19 +223,49 @@ class NHLFightsBot {
     }
 
     console.log(`      🆕 New fight detected!`);
+    console.log(`      ═══ FIGHT DATA ═══`);
 
-    // Log fight details
-    if (fight.isTwoManFight && fight.opponent) {
-      console.log(`         Players: ${fight.player.name} vs ${fight.opponent.name}`);
-    } else {
-      console.log(`         Player: ${fight.player.name}`);
+    // Log player 1 details
+    console.log(`      Player 1:`);
+    console.log(`        ID: ${fight.player.id}`);
+    console.log(`        Name: ${fight.player.name}`);
+    console.log(`        Team: ${fight.player.team}`);
+    if (fight.player.name === 'Unknown') {
+      console.log(`        ⚠️  WARNING: Unknown player detected!`);
     }
-    console.log(`         Time: Period ${fight.period}, ${fight.timeInPeriod}`);
-    console.log(`         Score: ${fight.awayTeam} ${fight.awayScore}-${fight.homeScore} ${fight.homeTeam}`);
+
+    // Log player 2 details if two-man fight
+    if (fight.isTwoManFight && fight.opponent) {
+      console.log(`      Player 2:`);
+      console.log(`        ID: ${fight.opponent.id}`);
+      console.log(`        Name: ${fight.opponent.name}`);
+      console.log(`        Team: ${fight.opponent.team}`);
+      if (fight.opponent.name === 'Unknown') {
+        console.log(`        ⚠️  WARNING: Unknown player detected!`);
+      }
+    } else {
+      console.log(`      Player 2: N/A (single player fight)`);
+    }
+
+    console.log(`      Game Info:`);
+    console.log(`        Game ID: ${fight.gameId}`);
+    console.log(`        Event ID: ${fight.eventId}`);
+    console.log(`        Period: ${fight.period} ${fight.periodType}`);
+    console.log(`        Time: ${fight.timeInPeriod}`);
+    console.log(`        Score: ${fight.awayTeam} ${fight.awayScore}-${fight.homeScore} ${fight.homeTeam}`);
 
     try {
       // Format and send tweet
       const tweetText = twitterClient.formatFightTweet(fight, game);
+
+      console.log(`      ═══ TWEET DATA ═══`);
+      console.log(`      Tweet Text (${tweetText.length} chars):`);
+      console.log(`      ┌${'─'.repeat(58)}┐`);
+      tweetText.split('\n').forEach(line => {
+        console.log(`      │ ${line.padEnd(56)} │`);
+      });
+      console.log(`      └${'─'.repeat(58)}┘`);
+
       await twitterClient.tweet(tweetText);
 
       // Get current season
