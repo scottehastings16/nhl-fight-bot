@@ -192,7 +192,7 @@ class TwitterClient {
     let tweet = '📊 SEASON LEADERBOARD\n\n';
 
     // Top 5 Fighters (with abbreviated first names)
-    tweet += '🥊 TOP FIGHTERS:\n';
+    tweet += '🥊 FIGHTS:\n';
     topFighters.slice(0, 5).forEach((fighter, index) => {
       const shortName = this.abbreviateName(fighter.name);
       tweet += `${index + 1}. ${shortName} (${fighter.team}) ${fighter.fightCount}\n`;

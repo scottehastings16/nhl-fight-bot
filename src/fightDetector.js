@@ -121,8 +121,7 @@ class FightDetector {
         return otherIndex !== index &&
                !processed.has(otherIndex) &&
                other.period === fight.period &&
-               other.timeInPeriod === fight.timeInPeriod &&
-               Math.abs(other.eventId - fight.eventId) <= 10; // Events close together (usually within 10 events)
+               other.timeInPeriod === fight.timeInPeriod;
       });
 
       if (matchingFight) {
