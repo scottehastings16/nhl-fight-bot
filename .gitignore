@@ -3,4 +3,11 @@ node_modules/
 fights.json
 *.log
 .DS_Store
+
+# Claude-related files
 .claude/
+*.claude
+claude.*
+.claude*
+*claude.json
+*claude.config*

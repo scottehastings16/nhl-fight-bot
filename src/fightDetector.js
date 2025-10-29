@@ -13,20 +13,22 @@ class FightDetector {
     }
 
     const fights = [];
+    const penalties = playByPlayData.plays.filter(play => play.typeDescKey === 'penalty');
 
-    // Iterate through all plays
-    playByPlayData.plays.forEach(play => {
-      // Check if this is a penalty event
-      if (play.typeDescKey === 'penalty') {
-        // Check if it's a fighting penalty
-        const isFight = this.isFightingPenalty(play);
+    // Iterate through all penalties
+    penalties.forEach(play => {
+      // Check if it's a fighting penalty
+      const isFight = this.isFightingPenalty(play);
 
-        if (isFight) {
-          const fightInfo = this.extractFightInfo(play, playByPlayData);
-          fights.push(fightInfo);
-        }
+      if (isFight) {
+        const fightInfo = this.extractFightInfo(play, playByPlayData);
+        fights.push(fightInfo);
       }
     });
+
+    // Also detect roughing penalties that have matching misconducts (alternate fight classification)
+    const roughingFights = this.detectRoughingFights(penalties, playByPlayData);
+    fights.push(...roughingFights);
 
     // Group simultaneous fighting penalties (both players in a fight)
     return this.groupFights(fights);
@@ -47,6 +49,54 @@ class FightDetector {
     return penaltyType.includes('fighting') ||
            reason.includes('fighting') ||
            penaltyType === 'fight';
+  }
+
+  /**
+   * Detect fights that are classified as roughing + misconduct
+   * Sometimes fights are recorded as roughing penalties with matching misconducts
+   * @param {Array} penalties - Array of all penalty plays
+   * @param {Object} playByPlayData - Full play-by-play data
+   * @returns {Array} Array of detected fights
+   */
+  detectRoughingFights(penalties, playByPlayData) {
+    const fights = [];
+    const processedPlayers = new Set(); // Track player-time combos to avoid duplicates
+
+    penalties.forEach((penalty, index) => {
+      // Look for roughing penalties
+      const penaltyType = penalty.details?.descKey?.toLowerCase() || '';
+      if (penaltyType !== 'roughing') return;
+
+      const playerId = penalty.details?.committedByPlayerId;
+      const period = penalty.periodDescriptor?.number;
+      const timeInPeriod = penalty.timeInPeriod;
+
+      // Create unique key for this player at this time
+      const playerKey = `${playerId}-${period}-${timeInPeriod}`;
+      if (processedPlayers.has(playerKey)) return; // Already processed this player
+
+      // Check if this player has a misconduct penalty at the same time
+      const hasMisconduct = penalties.some((other) => {
+        const otherType = other.details?.descKey?.toLowerCase() || '';
+        const otherPlayerId = other.details?.committedByPlayerId;
+        const otherPeriod = other.periodDescriptor?.number;
+        const otherTime = other.timeInPeriod;
+
+        return otherType === 'misconduct' &&
+               otherPlayerId === playerId &&
+               otherPeriod === period &&
+               otherTime === timeInPeriod;
+      });
+
+      // If roughing + misconduct, treat it as a fight
+      if (hasMisconduct) {
+        processedPlayers.add(playerKey);
+        const fightInfo = this.extractFightInfo(penalty, playByPlayData);
+        fights.push(fightInfo);
+      }
+    });
+
+    return fights;
   }
 
   /**
@@ -105,6 +155,19 @@ class FightDetector {
   }
 
   /**
+   * Convert time string (MM:SS) to seconds
+   * @param {string} timeString - Time in format "MM:SS"
+   * @returns {number} Time in seconds
+   */
+  timeToSeconds(timeString) {
+    const parts = timeString.split(':');
+    if (parts.length !== 2) return 0;
+    const minutes = parseInt(parts[0], 10) || 0;
+    const seconds = parseInt(parts[1], 10) || 0;
+    return minutes * 60 + seconds;
+  }
+
+  /**
    * Group simultaneous fighting penalties (typically 2 players fighting each other)
    * @param {Array} fights - Array of individual fight penalties
    * @returns {Array} Array of grouped fights
@@ -116,12 +179,19 @@ class FightDetector {
     fights.forEach((fight, index) => {
       if (processed.has(index)) return;
 
-      // Look for matching fight at same time
+      // Look for matching fight at same time (within 5 seconds and same period)
+      const fightTime = this.timeToSeconds(fight.timeInPeriod);
       const matchingFight = fights.find((other, otherIndex) => {
-        return otherIndex !== index &&
-               !processed.has(otherIndex) &&
-               other.period === fight.period &&
-               other.timeInPeriod === fight.timeInPeriod;
+        if (otherIndex === index || processed.has(otherIndex)) return false;
+        if (other.period !== fight.period) return false;
+
+        // Make sure it's a different player (prevent self-fights)
+        if (other.player.id === fight.player.id) return false;
+
+        // Allow fights within 5 seconds of each other to be grouped
+        const otherTime = this.timeToSeconds(other.timeInPeriod);
+        const timeDiff = Math.abs(fightTime - otherTime);
+        return timeDiff <= 5;
       });
 
       if (matchingFight) {
