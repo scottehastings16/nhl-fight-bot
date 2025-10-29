@@ -79,10 +79,12 @@ npm run dev
 
 ## API Information
 
-This bot uses the unofficial NHL API:
+This bot uses the NHL's undocumented web API (the same API used by NHL.com and official NHL apps):
 - Base URL: `https://api-web.nhle.com/`
-- No API key required for NHL data
+- This is the actual NHL API but not publicly documented or officially supported for third-party use
+- No API key required
 - Endpoints used:
+  - `/v1/schedule/{date}` - Games by date
   - `/v1/score/now` - Current games
   - `/v1/gamecenter/{gameId}/play-by-play` - Play-by-play data
 
