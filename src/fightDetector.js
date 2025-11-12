@@ -2,36 +2,90 @@
  * Detects fights from NHL play-by-play data
  */
 class FightDetector {
+  constructor() {
+    // Queue to hold detected individual fighting penalties
+    // Structure: Map<fightKey, {penalty, firstSeenAt, playByPlayData}>
+    this.pendingFights = new Map();
+
+    // How long to wait before processing a fight (in milliseconds)
+    // This gives the NHL API time to populate both fighters
+    this.waitPeriod = 120000; // 2 minutes
+
+    // Time window for pairing fighters (in game seconds)
+    this.pairingWindow = 15; // 15 seconds of game time
+  }
+
   /**
    * Extract all fights from play-by-play data
+   * This now returns pending fights that are ready to be processed
    * @param {Object} playByPlayData - Play-by-play data from NHL API
-   * @returns {Array} Array of fight objects
+   * @returns {Array} Array of fight objects that are ready to tweet
    */
   detectFights(playByPlayData) {
     if (!playByPlayData.plays) {
       return [];
     }
 
-    const fights = [];
+    const now = Date.now();
     const penalties = playByPlayData.plays.filter(play => play.typeDescKey === 'penalty');
 
-    // Iterate through all penalties
+    // First, add any new fighting penalties to the queue
     penalties.forEach(play => {
       // Check if it's a fighting penalty
       const isFight = this.isFightingPenalty(play);
 
       if (isFight) {
         const fightInfo = this.extractFightInfo(play, playByPlayData);
-        fights.push(fightInfo);
+        const key = `${fightInfo.gameId}-${fightInfo.eventId}`;
+
+        // Add to queue if not already there
+        if (!this.pendingFights.has(key)) {
+          console.log(`      ⏳ Adding fight to queue: ${fightInfo.player.name} (${fightInfo.player.team}) - Event ${fightInfo.eventId}`);
+          console.log(`         Will wait ${this.waitPeriod / 1000}s before processing`);
+          this.pendingFights.set(key, {
+            penalty: fightInfo,
+            firstSeenAt: now,
+            playByPlayData: playByPlayData
+          });
+        }
       }
     });
 
     // Also detect roughing penalties that have matching misconducts (alternate fight classification)
     const roughingFights = this.detectRoughingFights(penalties, playByPlayData);
-    fights.push(...roughingFights);
+    roughingFights.forEach(fightInfo => {
+      const key = `${fightInfo.gameId}-${fightInfo.eventId}`;
+      if (!this.pendingFights.has(key)) {
+        console.log(`      ⏳ Adding roughing fight to queue: ${fightInfo.player.name} (${fightInfo.player.team}) - Event ${fightInfo.eventId}`);
+        console.log(`         Will wait ${this.waitPeriod / 1000}s before processing`);
+        this.pendingFights.set(key, {
+          penalty: fightInfo,
+          firstSeenAt: now,
+          playByPlayData: playByPlayData
+        });
+      }
+    });
 
-    // Group simultaneous fighting penalties (both players in a fight)
-    return this.groupFights(fights);
+    // Now check which fights are ready to be processed (past the wait period)
+    const readyFights = [];
+    const fightsToRemove = [];
+
+    for (const [key, data] of this.pendingFights.entries()) {
+      const timeSinceFirstSeen = now - data.firstSeenAt;
+
+      if (timeSinceFirstSeen >= this.waitPeriod) {
+        // This fight has been waiting long enough, process it
+        console.log(`      ✅ Fight ready to process: ${data.penalty.player.name} - waited ${(timeSinceFirstSeen / 1000).toFixed(1)}s`);
+        readyFights.push(data.penalty);
+        fightsToRemove.push(key);
+      }
+    }
+
+    // Remove processed fights from queue
+    fightsToRemove.forEach(key => this.pendingFights.delete(key));
+
+    // Group fights by pairing them up
+    return this.groupFights(readyFights);
   }
 
   /**
@@ -179,19 +233,20 @@ class FightDetector {
     fights.forEach((fight, index) => {
       if (processed.has(index)) return;
 
-      // Look for matching fight at same time (within 5 seconds and same period)
+      // Look for matching fight at same time (within pairingWindow seconds and same period)
       const fightTime = this.timeToSeconds(fight.timeInPeriod);
       const matchingFight = fights.find((other, otherIndex) => {
         if (otherIndex === index || processed.has(otherIndex)) return false;
         if (other.period !== fight.period) return false;
+        if (other.gameId !== fight.gameId) return false;
 
         // Make sure it's a different player (prevent self-fights)
         if (other.player.id === fight.player.id) return false;
 
-        // Allow fights within 5 seconds of each other to be grouped
+        // Allow fights within pairingWindow seconds of each other to be grouped
         const otherTime = this.timeToSeconds(other.timeInPeriod);
         const timeDiff = Math.abs(fightTime - otherTime);
-        return timeDiff <= 5;
+        return timeDiff <= this.pairingWindow;
       });
 
       if (matchingFight) {
@@ -233,6 +288,35 @@ class FightDetector {
       return `${fight.gameId}-${lowerEventId}`;
     }
     return `${fight.gameId}-${fight.eventId}`;
+  }
+
+  /**
+   * Get current queue status for debugging
+   * @returns {Object} Queue status information
+   */
+  getQueueStatus() {
+    const now = Date.now();
+    const queuedFights = [];
+
+    for (const [key, data] of this.pendingFights.entries()) {
+      const timeSinceFirstSeen = now - data.firstSeenAt;
+      const timeRemaining = Math.max(0, this.waitPeriod - timeSinceFirstSeen);
+
+      queuedFights.push({
+        key,
+        player: data.penalty.player.name,
+        team: data.penalty.player.team,
+        eventId: data.penalty.eventId,
+        gameId: data.penalty.gameId,
+        waitedSeconds: (timeSinceFirstSeen / 1000).toFixed(1),
+        remainingSeconds: (timeRemaining / 1000).toFixed(1)
+      });
+    }
+
+    return {
+      count: this.pendingFights.size,
+      fights: queuedFights
+    };
   }
 }
 

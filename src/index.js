@@ -176,8 +176,17 @@ class NHLFightsBot {
       // Detect fights
       const fights = fightDetector.detectFights(playByPlayData);
 
+      // Show queue status
+      const queueStatus = fightDetector.getQueueStatus();
+      if (queueStatus.count > 0) {
+        console.log(`      ⏳ Queue: ${queueStatus.count} fight(s) waiting`);
+        queueStatus.fights.forEach(f => {
+          console.log(`         - ${f.player} (${f.team}) - ${f.remainingSeconds}s remaining`);
+        });
+      }
+
       if (fights.length === 0) {
-        console.log(`      No fights detected`);
+        console.log(`      No fights ready to process yet`);
         return;
       }
 
