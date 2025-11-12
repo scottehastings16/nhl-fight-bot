@@ -4,19 +4,188 @@
     "2025020003-27",
     "2025020011-9",
     "2025020011-19",
+    "2025020022-227",
+    "2025020023-562",
+    "2025020031-603",
+    "2025020034-499",
+    "2025020036-18",
+    "2025020037-661",
+    "2025020054-353",
+    "2025020060-751",
+    "2025020080-44",
+    "2025020081-138",
+    "2025020082-13",
+    "2025020084-634",
+    "2025020087-89",
+    "2025020087-286",
+    "2025020089-832",
+    "2025020092-103",
+    "2025020094-343",
+    "2025020094-922",
+    "2025020098-567",
+    "2025020103-393",
+    "2025020104-653",
+    "2025020105-467",
+    "2025020105-472",
+    "2025020111-706",
+    "2025020115-373",
+    "2025020116-184",
+    "2025020126-16",
+    "2025020127-21",
+    "2025020127-832",
+    "2025020129-30",
+    "2025020132-21",
+    "2025020134-316",
+    "2025020141-8",
+    "2025020153-45",
+    "2025020157-585",
+    "2025020158-219",
+    "2025020160-569",
+    "2025020163-25",
+    "2025020167-938",
+    "2025020183-714",
+    "2025020186-211",
+    "2025020187-16",
+    "2025020187-471",
+    "2025020189-177",
+    "2025020204-814",
+    "2025020209-133",
+    "2025020214-702",
+    "2025020219-142",
+    "2025020222-407",
+    "2025020226-46",
+    "2025020227-1007",
+    "2025020229-21",
+    "2025020229-553",
+    "2025020229-575",
+    "2025020231-244",
+    "2025020234-765",
+    "2025020236-520",
+    "2025020254-84",
+    "2025020255-86",
     "2025020259-18",
     "2025020259-20"
   ],
   "playerStats": {
     "2025-2026": {
+      "8470621": {
+        "name": "Corey Perry",
+        "team": "LAK",
+        "fightCount": 1
+      },
+      "8471817": {
+        "name": "Ryan Reaves",
+        "team": "SJS",
+        "fightCount": 2
+      },
       "8473422": {
         "name": "Nick Foligno",
         "team": "CHI",
+        "fightCount": 2
+      },
+      "8473533": {
+        "name": "Jordan Staal",
+        "team": "CAR",
         "fightCount": 1
+      },
+      "8474568": {
+        "name": "Luke Schenn",
+        "team": "WPG",
+        "fightCount": 2
+      },
+      "8474612": {
+        "name": "Travis Hamonic",
+        "team": "DET",
+        "fightCount": 2
+      },
+      "8475170": {
+        "name": "Brayden Schenn",
+        "team": "STL",
+        "fightCount": 2
+      },
+      "8475220": {
+        "name": "Marcus Foligno",
+        "team": "MIN",
+        "fightCount": 1
+      },
+      "8475235": {
+        "name": "Nicolas Deslauriers",
+        "team": "PHI",
+        "fightCount": 2
+      },
+      "8475455": {
+        "name": "Brenden Dillon",
+        "team": "NJD",
+        "fightCount": 1
+      },
+      "8475752": {
+        "name": "Tyler Pitlick",
+        "team": "MIN",
+        "fightCount": 1
+      },
+      "8475755": {
+        "name": "Alexander Petrovic",
+        "team": "DAL",
+        "fightCount": 1
+      },
+      "8475842": {
+        "name": "Sam Carrick",
+        "team": "NYR",
+        "fightCount": 2
       },
       "8476312": {
         "name": "Josh Manson",
         "team": "COL",
+        "fightCount": 1
+      },
+      "8476393": {
+        "name": "Nick Cousins",
+        "team": "OTT",
+        "fightCount": 2
+      },
+      "8476429": {
+        "name": "Scott Mayfield",
+        "team": "NYI",
+        "fightCount": 2
+      },
+      "8476432": {
+        "name": "Boone Jenner",
+        "team": "CBJ",
+        "fightCount": 1
+      },
+      "8476455": {
+        "name": "Gabriel Landeskog",
+        "team": "COL",
+        "fightCount": 1
+      },
+      "8476856": {
+        "name": "Mathew Dumba",
+        "team": "PIT",
+        "fightCount": 1
+      },
+      "8476880": {
+        "name": "Tom Wilson",
+        "team": "WSH",
+        "fightCount": 1
+      },
+      "8476925": {
+        "name": "Colton Sissons",
+        "team": "VGK",
+        "fightCount": 1
+      },
+      "8476931": {
+        "name": "Jake McCabe",
+        "team": "TOR",
+        "fightCount": 1
+      },
+      "8477018": {
+        "name": "Ben Hutton",
+        "team": "VGK",
+        "fightCount": 1
+      },
+      "8477070": {
+        "name": "Liam O'Brien",
+        "team": "UTA",
         "fightCount": 1
       },
       "8477073": {
@@ -24,29 +193,329 @@
         "team": "OTT",
         "fightCount": 1
       },
+      "8477346": {
+        "name": "MacKenzie Weegar",
+        "team": "CGY",
+        "fightCount": 1
+      },
+      "8477446": {
+        "name": "Michael McCarron",
+        "team": "NSH",
+        "fightCount": 2
+      },
+      "8477479": {
+        "name": "Tyler Bertuzzi",
+        "team": "CHI",
+        "fightCount": 1
+      },
+      "8477507": {
+        "name": "Nikita Zadorov",
+        "team": "BOS",
+        "fightCount": 1
+      },
+      "8477511": {
+        "name": "Anthony Mantha",
+        "team": "PIT",
+        "fightCount": 1
+      },
+      "8477527": {
+        "name": "Ross Johnston",
+        "team": "ANA",
+        "fightCount": 5
+      },
+      "8477810": {
+        "name": "Joel Hanley",
+        "team": "CGY",
+        "fightCount": 1
+      },
+      "8477903": {
+        "name": "Garnet Hathaway",
+        "team": "PHI",
+        "fightCount": 1
+      },
+      "8477949": {
+        "name": "Alex Tuch",
+        "team": "BUF",
+        "fightCount": 1
+      },
+      "8477969": {
+        "name": "Marcus Pettersson",
+        "team": "VAN",
+        "fightCount": 1
+      },
+      "8477986": {
+        "name": "Brandon Montour",
+        "team": "SEA",
+        "fightCount": 1
+      },
+      "8478136": {
+        "name": "Jake Middleton",
+        "team": "MIN",
+        "fightCount": 2
+      },
+      "8478366": {
+        "name": "Frank Vatrano",
+        "team": "ANA",
+        "fightCount": 1
+      },
+      "8478413": {
+        "name": "Jordan Greenway",
+        "team": "BUF",
+        "fightCount": 1
+      },
+      "8478416": {
+        "name": "Erik Cernak",
+        "team": "TBL",
+        "fightCount": 1
+      },
       "8478421": {
         "name": "A.J. Greer",
         "team": "FLA",
+        "fightCount": 3
+      },
+      "8478434": {
+        "name": "Keegan Kolesar",
+        "team": "VGK",
+        "fightCount": 1
+      },
+      "8478439": {
+        "name": "Travis Konecny",
+        "team": "PHI",
+        "fightCount": 1
+      },
+      "8478468": {
+        "name": "Jeremy Lauzon",
+        "team": "VGK",
+        "fightCount": 2
+      },
+      "8478891": {
+        "name": "Mason Appleton",
+        "team": "DET",
+        "fightCount": 1
+      },
+      "8479022": {
+        "name": "Rodrigo Abols",
+        "team": "PHI",
+        "fightCount": 1
+      },
+      "8479066": {
+        "name": "Ryan Lomberg",
+        "team": "CGY",
+        "fightCount": 2
+      },
+      "8479324": {
+        "name": "Ryan Lindgren",
+        "team": "SEA",
+        "fightCount": 1
+      },
+      "8479345": {
+        "name": "Jakob Chychrun",
+        "team": "WSH",
+        "fightCount": 1
+      },
+      "8479365": {
+        "name": "Trent Frederic",
+        "team": "EDM",
+        "fightCount": 1
+      },
+      "8479378": {
+        "name": "Logan Stanley",
+        "team": "WPG",
+        "fightCount": 2
+      },
+      "8479520": {
+        "name": "Brandon Duhaime",
+        "team": "WSH",
+        "fightCount": 2
+      },
+      "8479525": {
+        "name": "Ross Colton",
+        "team": "COL",
+        "fightCount": 1
+      },
+      "8479591": {
+        "name": "Michael Eyssimont",
+        "team": "BOS",
+        "fightCount": 1
+      },
+      "8479661": {
+        "name": "Tanner Jeannot",
+        "team": "BOS",
+        "fightCount": 1
+      },
+      "8479671": {
+        "name": "Mathieu Olivier",
+        "team": "CBJ",
+        "fightCount": 3
+      },
+      "8479705": {
+        "name": "Jeffrey Viel",
+        "team": "BOS",
+        "fightCount": 1
+      },
+      "8479981": {
+        "name": "Jonah Gadjovich",
+        "team": "FLA",
+        "fightCount": 1
+      },
+      "8479985": {
+        "name": "Cale Fleury",
+        "team": "SEA",
+        "fightCount": 1
+      },
+      "8480355": {
+        "name": "Mark Kastelic",
+        "team": "BOS",
+        "fightCount": 1
+      },
+      "8480426": {
+        "name": "Charle-Edouard D'Astous",
+        "team": "TBL",
+        "fightCount": 1
+      },
+      "8480797": {
+        "name": "Joel Farabee",
+        "team": "CGY",
+        "fightCount": 1
+      },
+      "8480813": {
+        "name": "Joe Veleno",
+        "team": "MTL",
+        "fightCount": 1
+      },
+      "8480855": {
+        "name": "Jack McBain",
+        "team": "UTA",
         "fightCount": 1
       },
       "8480876": {
         "name": "Curtis Douglas",
         "team": "TBL",
+        "fightCount": 2
+      },
+      "8481006": {
+        "name": "Tyler Tucker",
+        "team": "STL",
+        "fightCount": 4
+      },
+      "8481122": {
+        "name": "Simon Benoit",
+        "team": "TOR",
+        "fightCount": 1
+      },
+      "8481167": {
+        "name": "Brayden Pachal",
+        "team": "CGY",
+        "fightCount": 1
+      },
+      "8481237": {
+        "name": "Kyle MacLean",
+        "team": "NYI",
+        "fightCount": 1
+      },
+      "8481522": {
+        "name": "Peyton Krebs",
+        "team": "BUF",
+        "fightCount": 1
+      },
+      "8481568": {
+        "name": "Alex Vlasic",
+        "team": "CHI",
+        "fightCount": 1
+      },
+      "8481593": {
+        "name": "Jayden Struble",
+        "team": "MTL",
+        "fightCount": 1
+      },
+      "8481806": {
+        "name": "Louis Crevier",
+        "team": "CHI",
+        "fightCount": 1
+      },
+      "8482087": {
+        "name": "Kaiden Guhle",
+        "team": "MTL",
+        "fightCount": 1
+      },
+      "8482095": {
+        "name": "Tyler Kleven",
+        "team": "OTT",
+        "fightCount": 1
+      },
+      "8482103": {
+        "name": "Ozzy Wiesblatt",
+        "team": "NSH",
         "fightCount": 1
       },
       "8482131": {
         "name": "Donovan Sebrango",
         "team": "OTT",
+        "fightCount": 2
+      },
+      "8482259": {
+        "name": "Bobby McMann",
+        "team": "TOR",
         "fightCount": 1
       },
       "8482408": {
         "name": "Jeff Malott",
         "team": "LAK",
+        "fightCount": 3
+      },
+      "8482460": {
+        "name": "Matt Rempe",
+        "team": "NYR",
+        "fightCount": 1
+      },
+      "8482623": {
+        "name": "Josh Dunne",
+        "team": "BUF",
+        "fightCount": 1
+      },
+      "8482703": {
+        "name": "Colton Dach",
+        "team": "CHI",
+        "fightCount": 1
+      },
+      "8482877": {
+        "name": "Jaroslav Chmelar",
+        "team": "NYR",
         "fightCount": 1
       },
       "8482929": {
         "name": "Emil Lilleberg",
         "team": "TBL",
+        "fightCount": 3
+      },
+      "8482964": {
+        "name": "Arber Xhekaj",
+        "team": "MTL",
+        "fightCount": 2
+      },
+      "8483531": {
+        "name": "Brian Halonen",
+        "team": "NJD",
+        "fightCount": 1
+      },
+      "8483609": {
+        "name": "Adam Klapka",
+        "team": "CGY",
+        "fightCount": 3
+      },
+      "8483733": {
+        "name": "Nikita Grebenkin",
+        "team": "PHI",
+        "fightCount": 1
+      },
+      "8483768": {
+        "name": "Victor Mancini",
+        "team": "VAN",
+        "fightCount": 1
+      },
+      "8484829": {
+        "name": "Justin Hryckowian",
+        "team": "DAL",
         "fightCount": 1
       }
     }
@@ -55,19 +524,251 @@
     "2025-2026": {
       "8473422-vs-8478421": {
         "count": 1,
-        "lastFight": "2025-11-12T02:17:45.271Z"
+        "lastFight": "2025-11-12T02:30:49.705Z"
       },
       "8476312-vs-8482408": {
         "count": 1,
-        "lastFight": "2025-11-12T02:17:46.164Z"
+        "lastFight": "2025-11-12T02:30:50.480Z"
       },
       "8477073-vs-8480876": {
         "count": 1,
-        "lastFight": "2025-11-12T02:17:50.991Z"
+        "lastFight": "2025-11-12T02:30:55.098Z"
       },
       "8482131-vs-8482929": {
         "count": 1,
-        "lastFight": "2025-11-12T02:17:50.993Z"
+        "lastFight": "2025-11-12T02:30:55.100Z"
+      },
+      "8474568-vs-8482408": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:31:00.938Z"
+      },
+      "8479066-vs-8481006": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:31:01.383Z"
+      },
+      "8481806-vs-8482087": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:31:05.629Z"
+      },
+      "8479525-vs-8484829": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:31:07.014Z"
+      },
+      "8471817-vs-8477527": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:31:07.870Z"
+      },
+      "8477018-vs-8477986": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:31:08.327Z"
+      },
+      "8475755-vs-8478136": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:31:17.434Z"
+      },
+      "8480855-vs-8483609": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:31:20.210Z"
+      },
+      "8475842-vs-8482964": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:31:30.446Z"
+      },
+      "8475220-vs-8475235": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:31:30.902Z"
+      },
+      "8479671-vs-8480876": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:31:31.363Z"
+      },
+      "8477446-vs-8479378": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:31:32.271Z"
+      },
+      "8476925-vs-8479066": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:31:33.610Z"
+      },
+      "8478468-vs-8483609": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:31:33.612Z"
+      },
+      "8479520-vs-8483768": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:31:34.703Z"
+      },
+      "8477070-vs-8480355": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:31:36.123Z"
+      },
+      "8479985-vs-8483733": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:31:37.095Z"
+      },
+      "8478439-vs-8479324": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:31:37.097Z"
+      },
+      "8481122-vs-8483531": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:31:38.519Z"
+      },
+      "8479705-vs-8479981": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:31:40.260Z"
+      },
+      "8481006-vs-8482408": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:31:40.658Z"
+      },
+      "8477446-vs-8477527": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:31:41.104Z"
+      },
+      "8478366-vs-8482103": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:31:41.107Z"
+      },
+      "8477527-vs-8479661": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:31:44.608Z"
+      },
+      "8476429-vs-8478891": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:31:45.915Z"
+      },
+      "8471817-vs-8482460": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:31:46.359Z"
+      },
+      "8479378-vs-8483609": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:31:51.108Z"
+      },
+      "8476429-vs-8477903": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:31:51.667Z"
+      },
+      "8479022-vs-8481237": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:31:51.669Z"
+      },
+      "8477527-vs-8482929": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:31:52.550Z"
+      },
+      "8476931-vs-8477949": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:31:53.013Z"
+      },
+      "8476432-vs-8476856": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:31:54.854Z"
+      },
+      "8478434-vs-8482929": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:31:58.095Z"
+      },
+      "8477527-vs-8478421": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:32:04.870Z"
+      },
+      "8474568-vs-8478136": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:32:06.371Z"
+      },
+      "8474612-vs-8475170": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:32:06.817Z"
+      },
+      "8476393-vs-8477479": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:32:07.831Z"
+      },
+      "8475842-vs-8477969": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:32:09.255Z"
+      },
+      "8479591-vs-8481522": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:32:11.592Z"
+      },
+      "8476880-vs-8478413": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:32:21.396Z"
+      },
+      "8480813-vs-8482095": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:32:21.902Z"
+      },
+      "8476393-vs-8481593": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:32:21.904Z"
+      },
+      "8479671-vs-8481006": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:32:22.779Z"
+      },
+      "8475235-vs-8482964": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:32:30.744Z"
+      },
+      "8476455-vs-8480426": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:32:32.895Z"
+      },
+      "8475170-vs-8479520": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:32:35.229Z"
+      },
+      "8481006-vs-8482623": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:32:37.548Z"
+      },
+      "8473533-vs-8475752": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:32:38.280Z"
+      },
+      "8470621-vs-8478421": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:32:40.689Z"
+      },
+      "8474612-vs-8482877": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:32:41.251Z"
+      },
+      "8480797-vs-8482703": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:32:42.005Z"
+      },
+      "8477346-vs-8481568": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:32:42.008Z"
+      },
+      "8473422-vs-8477810": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:32:42.009Z"
+      },
+      "8475455-vs-8477511": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:32:43.288Z"
+      },
+      "8477507-vs-8482259": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:32:44.778Z"
+      },
+      "8478416-vs-8479345": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:32:45.669Z"
+      },
+      "8479365-vs-8479671": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:32:54.555Z"
+      },
+      "8478468-vs-8482131": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:32:54.869Z"
       }
     }
   },
@@ -81,13 +782,169 @@
       },
       "OTT-vs-TBL": {
         "fights": 2
+      },
+      "LAK-vs-WPG": {
+        "fights": 1
+      },
+      "CGY-vs-STL": {
+        "fights": 1
+      },
+      "CHI-vs-MTL": {
+        "fights": 1
+      },
+      "COL-vs-DAL": {
+        "fights": 1
+      },
+      "ANA-vs-SJS": {
+        "fights": 1
+      },
+      "SEA-vs-VGK": {
+        "fights": 1
+      },
+      "DAL-vs-MIN": {
+        "fights": 1
+      },
+      "CGY-vs-UTA": {
+        "fights": 1
+      },
+      "MTL-vs-NYR": {
+        "fights": 1
+      },
+      "MIN-vs-PHI": {
+        "fights": 1
+      },
+      "CBJ-vs-TBL": {
+        "fights": 1
+      },
+      "NSH-vs-WPG": {
+        "fights": 1
+      },
+      "CGY-vs-VGK": {
+        "fights": 2
+      },
+      "VAN-vs-WSH": {
+        "fights": 1
+      },
+      "BOS-vs-UTA": {
+        "fights": 1
+      },
+      "PHI-vs-SEA": {
+        "fights": 2
+      },
+      "NJD-vs-TOR": {
+        "fights": 1
+      },
+      "BOS-vs-FLA": {
+        "fights": 1
+      },
+      "LAK-vs-STL": {
+        "fights": 1
+      },
+      "ANA-vs-NSH": {
+        "fights": 2
+      },
+      "ANA-vs-BOS": {
+        "fights": 1
+      },
+      "DET-vs-NYI": {
+        "fights": 1
+      },
+      "NYR-vs-SJS": {
+        "fights": 1
+      },
+      "CGY-vs-WPG": {
+        "fights": 1
+      },
+      "NYI-vs-PHI": {
+        "fights": 2
+      },
+      "ANA-vs-TBL": {
+        "fights": 1
+      },
+      "BUF-vs-TOR": {
+        "fights": 1
+      },
+      "CBJ-vs-PIT": {
+        "fights": 1
+      },
+      "TBL-vs-VGK": {
+        "fights": 1
+      },
+      "ANA-vs-FLA": {
+        "fights": 1
+      },
+      "MIN-vs-WPG": {
+        "fights": 1
+      },
+      "DET-vs-STL": {
+        "fights": 1
+      },
+      "CHI-vs-OTT": {
+        "fights": 1
+      },
+      "NYR-vs-VAN": {
+        "fights": 1
+      },
+      "BOS-vs-BUF": {
+        "fights": 1
+      },
+      "CGY-vs-NSH": {
+        "fights": 1
+      },
+      "BUF-vs-WSH": {
+        "fights": 1
+      },
+      "MTL-vs-OTT": {
+        "fights": 2
+      },
+      "CBJ-vs-STL": {
+        "fights": 1
+      },
+      "MTL-vs-PHI": {
+        "fights": 1
+      },
+      "COL-vs-TBL": {
+        "fights": 1
+      },
+      "STL-vs-WSH": {
+        "fights": 1
+      },
+      "BUF-vs-STL": {
+        "fights": 1
+      },
+      "CAR-vs-MIN": {
+        "fights": 1
+      },
+      "FLA-vs-LAK": {
+        "fights": 1
+      },
+      "DET-vs-NYR": {
+        "fights": 1
+      },
+      "CGY-vs-CHI": {
+        "fights": 3
+      },
+      "NJD-vs-PIT": {
+        "fights": 1
+      },
+      "BOS-vs-TOR": {
+        "fights": 1
+      },
+      "TBL-vs-WSH": {
+        "fights": 1
+      },
+      "CBJ-vs-EDM": {
+        "fights": 1
+      },
+      "FLA-vs-VGK": {
+        "fights": 1
       }
     }
   },
   "weeklyStats": {
     "2025-2026": {
-      "2025-W44": {
-        "count": 2,
+      "2025-W40": {
+        "count": 10,
         "fights": [
           {
             "playerIds": [
@@ -104,12 +961,7 @@
             ],
             "players": "Josh Manson vs Jeff Malott",
             "teams": "COL @ LAK"
-          }
-        ]
-      },
-      "2025-W46": {
-        "count": 2,
-        "fights": [
+          },
           {
             "playerIds": [
               8477073,
@@ -125,6 +977,502 @@
             ],
             "players": "Emil Lilleberg vs Donovan Sebrango",
             "teams": "OTT @ TBL"
+          },
+          {
+            "playerIds": [
+              8482408,
+              8474568
+            ],
+            "players": "Jeff Malott vs Luke Schenn",
+            "teams": "LAK @ WPG"
+          },
+          {
+            "playerIds": [
+              8481006,
+              8479066
+            ],
+            "players": "Tyler Tucker vs Ryan Lomberg",
+            "teams": "STL @ CGY"
+          },
+          {
+            "playerIds": [
+              8482087,
+              8481806
+            ],
+            "players": "Kaiden Guhle vs Louis Crevier",
+            "teams": "MTL @ CHI"
+          },
+          {
+            "playerIds": [
+              8484829,
+              8479525
+            ],
+            "players": "Justin Hryckowian vs Ross Colton",
+            "teams": "DAL @ COL"
+          },
+          {
+            "playerIds": [
+              8471817,
+              8477527
+            ],
+            "players": "Ryan Reaves vs Ross Johnston",
+            "teams": "ANA @ SJS"
+          },
+          {
+            "playerIds": [
+              8477986,
+              8477018
+            ],
+            "players": "Brandon Montour vs Ben Hutton",
+            "teams": "VGK @ SEA"
+          }
+        ]
+      },
+      "2025-W41": {
+        "count": 8,
+        "fights": [
+          {
+            "playerIds": [
+              8478136,
+              8475755
+            ],
+            "players": "Jake Middleton vs Alexander Petrovic",
+            "teams": "MIN @ DAL"
+          },
+          {
+            "playerIds": [
+              8480855,
+              8483609
+            ],
+            "players": "Jack McBain vs Adam Klapka",
+            "teams": "CGY @ UTA"
+          },
+          {
+            "playerIds": [
+              8475842,
+              8482964
+            ],
+            "players": "Sam Carrick vs Arber Xhekaj",
+            "teams": "NYR @ MTL"
+          },
+          {
+            "playerIds": [
+              8475235,
+              8475220
+            ],
+            "players": "Nicolas Deslauriers vs Marcus Foligno",
+            "teams": "MIN @ PHI"
+          },
+          {
+            "playerIds": [
+              8479671,
+              8480876
+            ],
+            "players": "Mathieu Olivier vs Curtis Douglas",
+            "teams": "TBL @ CBJ"
+          },
+          {
+            "playerIds": [
+              8477446,
+              8479378
+            ],
+            "players": "Michael McCarron vs Logan Stanley",
+            "teams": "NSH @ WPG"
+          },
+          {
+            "playerIds": [
+              8476925,
+              8479066
+            ],
+            "players": "Colton Sissons vs Ryan Lomberg",
+            "teams": "CGY @ VGK"
+          },
+          {
+            "playerIds": [
+              8483609,
+              8478468
+            ],
+            "players": "Adam Klapka vs Jeremy Lauzon",
+            "teams": "CGY @ VGK"
+          }
+        ]
+      },
+      "2025-W42": {
+        "count": 18,
+        "fights": [
+          {
+            "playerIds": [
+              8479520,
+              8483768
+            ],
+            "players": "Brandon Duhaime vs Victor Mancini",
+            "teams": "VAN @ WSH"
+          },
+          {
+            "playerIds": [
+              8480355,
+              8477070
+            ],
+            "players": "Mark Kastelic vs Liam O'Brien",
+            "teams": "BOS @ UTA"
+          },
+          {
+            "playerIds": [
+              8479985,
+              8483733
+            ],
+            "players": "Cale Fleury vs Nikita Grebenkin",
+            "teams": "SEA @ PHI"
+          },
+          {
+            "playerIds": [
+              8479324,
+              8478439
+            ],
+            "players": "Ryan Lindgren vs Travis Konecny",
+            "teams": "SEA @ PHI"
+          },
+          {
+            "playerIds": [
+              8481122,
+              8483531
+            ],
+            "players": "Simon Benoit vs Brian Halonen",
+            "teams": "NJD @ TOR"
+          },
+          {
+            "playerIds": [
+              8479981,
+              8479705
+            ],
+            "players": "Jonah Gadjovich vs Jeffrey Viel",
+            "teams": "FLA @ BOS"
+          },
+          {
+            "playerIds": [
+              8482408,
+              8481006
+            ],
+            "players": "Jeff Malott vs Tyler Tucker",
+            "teams": "LAK @ STL"
+          },
+          {
+            "playerIds": [
+              8477527,
+              8477446
+            ],
+            "players": "Ross Johnston vs Michael McCarron",
+            "teams": "ANA @ NSH"
+          },
+          {
+            "playerIds": [
+              8482103,
+              8478366
+            ],
+            "players": "Ozzy Wiesblatt vs Frank Vatrano",
+            "teams": "ANA @ NSH"
+          },
+          {
+            "playerIds": [
+              8479661,
+              8477527
+            ],
+            "players": "Tanner Jeannot vs Ross Johnston",
+            "teams": "ANA @ BOS"
+          },
+          {
+            "playerIds": [
+              8476429,
+              8478891
+            ],
+            "players": "Scott Mayfield vs Mason Appleton",
+            "teams": "DET @ NYI"
+          },
+          {
+            "playerIds": [
+              8482460,
+              8471817
+            ],
+            "players": "Matt Rempe vs Ryan Reaves",
+            "teams": "SJS @ NYR"
+          },
+          {
+            "playerIds": [
+              8483609,
+              8479378
+            ],
+            "players": "Adam Klapka vs Logan Stanley",
+            "teams": "CGY @ WPG"
+          },
+          {
+            "playerIds": [
+              8476429,
+              8477903
+            ],
+            "players": "Scott Mayfield vs Garnet Hathaway",
+            "teams": "NYI @ PHI"
+          },
+          {
+            "playerIds": [
+              8479022,
+              8481237
+            ],
+            "players": "Rodrigo Abols vs Kyle MacLean",
+            "teams": "NYI @ PHI"
+          },
+          {
+            "playerIds": [
+              8477527,
+              8482929
+            ],
+            "players": "Ross Johnston vs Emil Lilleberg",
+            "teams": "ANA @ TBL"
+          },
+          {
+            "playerIds": [
+              8476931,
+              8477949
+            ],
+            "players": "Jake McCabe vs Alex Tuch",
+            "teams": "BUF @ TOR"
+          },
+          {
+            "playerIds": [
+              8476432,
+              8476856
+            ],
+            "players": "Boone Jenner vs Mathew Dumba",
+            "teams": "CBJ @ PIT"
+          }
+        ]
+      },
+      "2025-W43": {
+        "count": 12,
+        "fights": [
+          {
+            "playerIds": [
+              8478434,
+              8482929
+            ],
+            "players": "Keegan Kolesar vs Emil Lilleberg",
+            "teams": "VGK @ TBL"
+          },
+          {
+            "playerIds": [
+              8477527,
+              8478421
+            ],
+            "players": "Ross Johnston vs A.J. Greer",
+            "teams": "ANA @ FLA"
+          },
+          {
+            "playerIds": [
+              8478136,
+              8474568
+            ],
+            "players": "Jake Middleton vs Luke Schenn",
+            "teams": "WPG @ MIN"
+          },
+          {
+            "playerIds": [
+              8474612,
+              8475170
+            ],
+            "players": "Travis Hamonic vs Brayden Schenn",
+            "teams": "DET @ STL"
+          },
+          {
+            "playerIds": [
+              8477479,
+              8476393
+            ],
+            "players": "Tyler Bertuzzi vs Nick Cousins",
+            "teams": "OTT @ CHI"
+          },
+          {
+            "playerIds": [
+              8475842,
+              8477969
+            ],
+            "players": "Sam Carrick vs Marcus Pettersson",
+            "teams": "NYR @ VAN"
+          },
+          {
+            "playerIds": [
+              8479591,
+              8481522
+            ],
+            "players": "Michael Eyssimont vs Peyton Krebs",
+            "teams": "BUF @ BOS"
+          },
+          {
+            "playerIds": [
+              8481167
+            ],
+            "players": "Brayden Pachal",
+            "teams": "CGY @ NSH"
+          },
+          {
+            "playerIds": [
+              8478413,
+              8476880
+            ],
+            "players": "Jordan Greenway vs Tom Wilson",
+            "teams": "WSH @ BUF"
+          },
+          {
+            "playerIds": [
+              8480813,
+              8482095
+            ],
+            "players": "Joe Veleno vs Tyler Kleven",
+            "teams": "OTT @ MTL"
+          },
+          {
+            "playerIds": [
+              8481593,
+              8476393
+            ],
+            "players": "Jayden Struble vs Nick Cousins",
+            "teams": "OTT @ MTL"
+          },
+          {
+            "playerIds": [
+              8481006,
+              8479671
+            ],
+            "players": "Tyler Tucker vs Mathieu Olivier",
+            "teams": "STL @ CBJ"
+          }
+        ]
+      },
+      "2025-W44": {
+        "count": 13,
+        "fights": [
+          {
+            "playerIds": [
+              8475235,
+              8482964
+            ],
+            "players": "Nicolas Deslauriers vs Arber Xhekaj",
+            "teams": "PHI @ MTL"
+          },
+          {
+            "playerIds": [
+              8480426,
+              8476455
+            ],
+            "players": "Charle-Edouard D'Astous vs Gabriel Landeskog",
+            "teams": "TBL @ COL"
+          },
+          {
+            "playerIds": [
+              8479520,
+              8475170
+            ],
+            "players": "Brandon Duhaime vs Brayden Schenn",
+            "teams": "STL @ WSH"
+          },
+          {
+            "playerIds": [
+              8482623,
+              8481006
+            ],
+            "players": "Josh Dunne vs Tyler Tucker",
+            "teams": "STL @ BUF"
+          },
+          {
+            "playerIds": [
+              8475752,
+              8473533
+            ],
+            "players": "Tyler Pitlick vs Jordan Staal",
+            "teams": "MIN @ CAR"
+          },
+          {
+            "playerIds": [
+              8470621,
+              8478421
+            ],
+            "players": "Corey Perry vs A.J. Greer",
+            "teams": "FLA @ LAK"
+          },
+          {
+            "playerIds": [
+              8474612,
+              8482877
+            ],
+            "players": "Travis Hamonic vs Jaroslav Chmelar",
+            "teams": "NYR @ DET"
+          },
+          {
+            "playerIds": [
+              8482703,
+              8480797
+            ],
+            "players": "Colton Dach vs Joel Farabee",
+            "teams": "CHI @ CGY"
+          },
+          {
+            "playerIds": [
+              8477346,
+              8481568
+            ],
+            "players": "MacKenzie Weegar vs Alex Vlasic",
+            "teams": "CHI @ CGY"
+          },
+          {
+            "playerIds": [
+              8473422,
+              8477810
+            ],
+            "players": "Nick Foligno vs Joel Hanley",
+            "teams": "CHI @ CGY"
+          },
+          {
+            "playerIds": [
+              8475455,
+              8477511
+            ],
+            "players": "Brenden Dillon vs Anthony Mantha",
+            "teams": "PIT @ NJD"
+          },
+          {
+            "playerIds": [
+              8477507,
+              8482259
+            ],
+            "players": "Nikita Zadorov vs Bobby McMann",
+            "teams": "BOS @ TOR"
+          },
+          {
+            "playerIds": [
+              8479345,
+              8478416
+            ],
+            "players": "Jakob Chychrun vs Erik Cernak",
+            "teams": "WSH @ TBL"
+          }
+        ]
+      },
+      "2025-W46": {
+        "count": 2,
+        "fights": [
+          {
+            "playerIds": [
+              8479671,
+              8479365
+            ],
+            "players": "Mathieu Olivier vs Trent Frederic",
+            "teams": "CBJ @ EDM"
+          },
+          {
+            "playerIds": [
+              8482131,
+              8478468
+            ],
+            "players": "Donovan Sebrango vs Jeremy Lauzon",
+            "teams": "FLA @ VGK"
           }
         ]
       }

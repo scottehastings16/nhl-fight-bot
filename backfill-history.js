@@ -13,6 +13,10 @@ async function backfillHistory() {
 
   await storage.initialize();
 
+  // Temporarily set wait period to 0 for backfill (no need to wait for historical fights)
+  const originalWaitPeriod = fightDetector.waitPeriod;
+  fightDetector.waitPeriod = 0;
+
   const today = new Date();
   const seasonStart = new Date('2025-10-07'); // Start of 2025-2026 season (Oct 7, 2025)
   const daysToScan = Math.floor((today - seasonStart) / (1000 * 60 * 60 * 24));
@@ -52,7 +56,7 @@ async function backfillHistory() {
           await new Promise(resolve => setTimeout(resolve, 200));
 
           const playByPlay = await nhlApi.getPlayByPlay(game.id);
-          const fights = fightDetector.detectFights(playByPlay);
+          const fights = fightDetector.detectFights(playByPlay, storage);
 
           if (fights.length > 0) {
             console.log(`📅 ${dateString} | ${game.awayTeam.abbrev} @ ${game.homeTeam.abbrev}: ${fights.length} fight(s)`);
@@ -97,6 +101,9 @@ async function backfillHistory() {
       console.log(`   Games: ${totalGames} | Fights found: ${totalFights} | New: ${newFights}\n`);
     }
   }
+
+  // Restore original wait period
+  fightDetector.waitPeriod = originalWaitPeriod;
 
   console.log('\n' + '─'.repeat(60));
   console.log('\n✅ Backfill Complete!\n');
