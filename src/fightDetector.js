@@ -19,9 +19,10 @@ class FightDetector {
    * Extract all fights from play-by-play data
    * This now returns pending fights that are ready to be processed
    * @param {Object} playByPlayData - Play-by-play data from NHL API
+   * @param {Object} storage - Storage instance to check if already processed
    * @returns {Array} Array of fight objects that are ready to tweet
    */
-  detectFights(playByPlayData) {
+  detectFights(playByPlayData, storage = null) {
     if (!playByPlayData.plays) {
       return [];
     }
@@ -38,25 +39,22 @@ class FightDetector {
         const fightInfo = this.extractFightInfo(play, playByPlayData);
         const key = `${fightInfo.gameId}-${fightInfo.eventId}`;
 
-        // Add to queue if not already there
-        if (!this.pendingFights.has(key)) {
-          console.log(`      ⏳ Adding fight to queue: ${fightInfo.player.name} (${fightInfo.player.team}) - Event ${fightInfo.eventId}`);
-          console.log(`         Will wait ${this.waitPeriod / 1000}s before processing`);
-          this.pendingFights.set(key, {
-            penalty: fightInfo,
-            firstSeenAt: now,
-            playByPlayData: playByPlayData
-          });
+        // Check if already in queue
+        if (this.pendingFights.has(key)) {
+          return; // Already queued
         }
-      }
-    });
 
-    // Also detect roughing penalties that have matching misconducts (alternate fight classification)
-    const roughingFights = this.detectRoughingFights(penalties, playByPlayData);
-    roughingFights.forEach(fightInfo => {
-      const key = `${fightInfo.gameId}-${fightInfo.eventId}`;
-      if (!this.pendingFights.has(key)) {
-        console.log(`      ⏳ Adding roughing fight to queue: ${fightInfo.player.name} (${fightInfo.player.team}) - Event ${fightInfo.eventId}`);
+        // Check if already processed in storage
+        if (storage) {
+          const tempFight = { ...fightInfo, isTwoManFight: false };
+          const fightId = this.createFightId(tempFight);
+          if (storage.hasProcessed(fightId)) {
+            return; // Already processed, don't re-queue
+          }
+        }
+
+        // Add to queue
+        console.log(`      ⏳ Adding fight to queue: ${fightInfo.player.name} (${fightInfo.player.team}) - Event ${fightInfo.eventId}`);
         console.log(`         Will wait ${this.waitPeriod / 1000}s before processing`);
         this.pendingFights.set(key, {
           penalty: fightInfo,
@@ -64,6 +62,34 @@ class FightDetector {
           playByPlayData: playByPlayData
         });
       }
+    });
+
+    // Also detect roughing penalties that have matching misconducts (alternate fight classification)
+    const roughingFights = this.detectRoughingFights(penalties, playByPlayData);
+    roughingFights.forEach(fightInfo => {
+      const key = `${fightInfo.gameId}-${fightInfo.eventId}`;
+
+      // Check if already in queue
+      if (this.pendingFights.has(key)) {
+        return; // Already queued
+      }
+
+      // Check if already processed in storage
+      if (storage) {
+        const tempFight = { ...fightInfo, isTwoManFight: false };
+        const fightId = this.createFightId(tempFight);
+        if (storage.hasProcessed(fightId)) {
+          return; // Already processed, don't re-queue
+        }
+      }
+
+      console.log(`      ⏳ Adding roughing fight to queue: ${fightInfo.player.name} (${fightInfo.player.team}) - Event ${fightInfo.eventId}`);
+      console.log(`         Will wait ${this.waitPeriod / 1000}s before processing`);
+      this.pendingFights.set(key, {
+        penalty: fightInfo,
+        firstSeenAt: now,
+        playByPlayData: playByPlayData
+      });
     });
 
     // Now check which fights are ready to be processed (past the wait period)

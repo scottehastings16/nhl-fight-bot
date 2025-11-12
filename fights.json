@@ -1,0 +1,133 @@
+{
+  "fights": [
+    "2025020001-25",
+    "2025020003-27",
+    "2025020011-9",
+    "2025020011-19",
+    "2025020259-18",
+    "2025020259-20"
+  ],
+  "playerStats": {
+    "2025-2026": {
+      "8473422": {
+        "name": "Nick Foligno",
+        "team": "CHI",
+        "fightCount": 1
+      },
+      "8476312": {
+        "name": "Josh Manson",
+        "team": "COL",
+        "fightCount": 1
+      },
+      "8477073": {
+        "name": "Kurtis MacDermid",
+        "team": "OTT",
+        "fightCount": 1
+      },
+      "8478421": {
+        "name": "A.J. Greer",
+        "team": "FLA",
+        "fightCount": 1
+      },
+      "8480876": {
+        "name": "Curtis Douglas",
+        "team": "TBL",
+        "fightCount": 1
+      },
+      "8482131": {
+        "name": "Donovan Sebrango",
+        "team": "OTT",
+        "fightCount": 1
+      },
+      "8482408": {
+        "name": "Jeff Malott",
+        "team": "LAK",
+        "fightCount": 1
+      },
+      "8482929": {
+        "name": "Emil Lilleberg",
+        "team": "TBL",
+        "fightCount": 1
+      }
+    }
+  },
+  "rivalries": {
+    "2025-2026": {
+      "8473422-vs-8478421": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:17:45.271Z"
+      },
+      "8476312-vs-8482408": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:17:46.164Z"
+      },
+      "8477073-vs-8480876": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:17:50.991Z"
+      },
+      "8482131-vs-8482929": {
+        "count": 1,
+        "lastFight": "2025-11-12T02:17:50.993Z"
+      }
+    }
+  },
+  "teamRivalries": {
+    "2025-2026": {
+      "CHI-vs-FLA": {
+        "fights": 1
+      },
+      "COL-vs-LAK": {
+        "fights": 1
+      },
+      "OTT-vs-TBL": {
+        "fights": 2
+      }
+    }
+  },
+  "weeklyStats": {
+    "2025-2026": {
+      "2025-W44": {
+        "count": 2,
+        "fights": [
+          {
+            "playerIds": [
+              8473422,
+              8478421
+            ],
+            "players": "Nick Foligno vs A.J. Greer",
+            "teams": "CHI @ FLA"
+          },
+          {
+            "playerIds": [
+              8476312,
+              8482408
+            ],
+            "players": "Josh Manson vs Jeff Malott",
+            "teams": "COL @ LAK"
+          }
+        ]
+      },
+      "2025-W46": {
+        "count": 2,
+        "fights": [
+          {
+            "playerIds": [
+              8477073,
+              8480876
+            ],
+            "players": "Kurtis MacDermid vs Curtis Douglas",
+            "teams": "OTT @ TBL"
+          },
+          {
+            "playerIds": [
+              8482929,
+              8482131
+            ],
+            "players": "Emil Lilleberg vs Donovan Sebrango",
+            "teams": "OTT @ TBL"
+          }
+        ]
+      }
+    }
+  }
+}

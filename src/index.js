@@ -26,10 +26,6 @@ class NHLFightsBot {
     // Daily leaderboard configuration
     this.dailyLeaderboardEnabled = process.env.DAILY_LEADERBOARD_ENABLED !== 'false';
     this.dailyLeaderboardTime = process.env.DAILY_LEADERBOARD_TIME || '12:00'; // Default noon
-
-    // Track when we first see each fight (for time-based filtering)
-    this.fightFirstSeen = new Map(); // fightId -> timestamp
-    this.fightTimeWindow = 5 * 60 * 1000; // 5 minutes in milliseconds
   }
 
   /**
@@ -173,8 +169,8 @@ class NHLFightsBot {
       // Get play-by-play data
       const playByPlayData = await nhlApi.getPlayByPlay(gameId);
 
-      // Detect fights
-      const fights = fightDetector.detectFights(playByPlayData);
+      // Detect fights (pass storage to prevent re-queueing already processed fights)
+      const fights = fightDetector.detectFights(playByPlayData, storage);
 
       // Show queue status
       const queueStatus = fightDetector.getQueueStatus();
@@ -217,19 +213,8 @@ class NHLFightsBot {
       return;
     }
 
-    // Track when we first see this fight
-    if (!this.fightFirstSeen.has(fightId)) {
-      this.fightFirstSeen.set(fightId, now);
-    }
-
-    // Check if fight is outside the time window (older than 5 minutes since first seen)
-    const firstSeenTime = this.fightFirstSeen.get(fightId);
-    const timeSinceFirstSeen = now - firstSeenTime;
-
-    if (timeSinceFirstSeen > this.fightTimeWindow) {
-      // Fight is too old, stop checking it
-      return;
-    }
+    // No additional time window check needed here - fights are already checked in storage
+    // before being added to the queue in detectFights()
 
     console.log(`      🆕 New fight detected!`);
     console.log(`      ═══ FIGHT DATA ═══`);
@@ -288,6 +273,16 @@ class NHLFightsBot {
         homeTeam: fight.homeTeam,
         awayTeam: fight.awayTeam
       });
+
+      // For two-man fights, also mark both individual event IDs as processed
+      // This prevents re-queueing of either fighter's penalty
+      if (fight.isTwoManFight && fight.opponent) {
+        const player1Id = `${fight.gameId}-${fight.eventId}`;
+        const player2Id = `${fight.gameId}-${fight.opponent.eventId}`;
+        await storage.markProcessed(player1Id);
+        await storage.markProcessed(player2Id);
+      }
+
       console.log(`      ✅ Fight processed and tweeted (ID: ${fightId})`);
 
     } catch (error) {

@@ -1,6 +1,5 @@
 node_modules/
 .env
-fights.json
 *.log
 .DS_Store
 
