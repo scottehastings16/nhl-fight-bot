@@ -213,6 +213,18 @@ class FightDetector {
       teamAbbrev = playByPlayData.awayTeam?.abbrev || '';
     }
 
+    // Extract score from situationCode (format: AAHH where A=away score, H=home score, last 2=manpower)
+    // Example: "1051" = away:1, home:0, 5v5 OR "2154" = away:2, home:1, 5v4
+    let homeScore = 0;
+    let awayScore = 0;
+    if (play.situationCode) {
+      const situationCode = play.situationCode.toString();
+      if (situationCode.length >= 2) {
+        awayScore = parseInt(situationCode.charAt(0), 10) || 0;
+        homeScore = parseInt(situationCode.charAt(1), 10) || 0;
+      }
+    }
+
     return {
       eventId: play.eventId,
       gameId: playByPlayData.id,
@@ -229,8 +241,8 @@ class FightDetector {
       duration: details.duration || 5,
       homeTeam: playByPlayData.homeTeam?.abbrev || '',
       awayTeam: playByPlayData.awayTeam?.abbrev || '',
-      homeScore: play.details?.homeScore || 0,
-      awayScore: play.details?.awayScore || 0
+      homeScore: homeScore,
+      awayScore: awayScore
     };
   }
 
