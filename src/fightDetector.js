@@ -94,24 +94,24 @@ class FightDetector {
 
     // Now check which fights are ready to be processed (past the wait period)
     const readyFights = [];
-    const fightsToRemove = [];
+    const maxWaitTime = this.waitPeriod * 3; // Maximum 6 minutes to find a pair
 
     for (const [key, data] of this.pendingFights.entries()) {
       const timeSinceFirstSeen = now - data.firstSeenAt;
 
       if (timeSinceFirstSeen >= this.waitPeriod) {
-        // This fight has been waiting long enough, process it
-        console.log(`      ✅ Fight ready to process: ${data.penalty.player.name} - waited ${(timeSinceFirstSeen / 1000).toFixed(1)}s`);
-        readyFights.push(data.penalty);
-        fightsToRemove.push(key);
+        // This fight has been waiting long enough, try to process it
+        readyFights.push({ key, data: data.penalty, waitTime: timeSinceFirstSeen });
+      } else if (timeSinceFirstSeen >= maxWaitTime) {
+        // Been waiting too long without finding a pair - give up and remove
+        console.log(`      ⏰ Timeout: ${data.penalty.player.name} waited ${(timeSinceFirstSeen / 1000).toFixed(1)}s without finding opponent - removing`);
+        this.pendingFights.delete(key);
       }
     }
 
-    // Remove processed fights from queue
-    fightsToRemove.forEach(key => this.pendingFights.delete(key));
-
-    // Group fights by pairing them up
-    return this.groupFights(readyFights);
+    // Group fights by pairing them up (includes checking remaining queue for potential pairs)
+    // This will return only paired fights and remove them from the queue
+    return this.groupFights(readyFights, this.pendingFights, now);
   }
 
   /**
@@ -249,36 +249,89 @@ class FightDetector {
 
   /**
    * Group simultaneous fighting penalties (typically 2 players fighting each other)
-   * @param {Array} fights - Array of individual fight penalties
-   * @returns {Array} Array of grouped fights
+   * ONLY returns paired fights - singles are left in queue to retry
+   * @param {Array} readyFights - Array of {key, data, waitTime} objects for fights ready to process
+   * @param {Map} pendingQueue - The pending fights queue (to check for potential pairs still waiting)
+   * @param {number} currentTime - Current timestamp
+   * @returns {Array} Array of paired fight objects (only two-man fights)
    */
-  groupFights(fights) {
+  groupFights(readyFights, pendingQueue = null, currentTime = Date.now()) {
     const grouped = [];
     const processed = new Set();
+    const keysToRemove = []; // Keys to remove from pending queue
 
-    fights.forEach((fight, index) => {
+    readyFights.forEach((readyFight, index) => {
       if (processed.has(index)) return;
+
+      const fight = readyFight.data;
+      const fightKey = readyFight.key;
 
       // Look for matching fight at same time (within pairingWindow seconds and same period)
       const fightTime = this.timeToSeconds(fight.timeInPeriod);
-      const matchingFight = fights.find((other, otherIndex) => {
-        if (otherIndex === index || processed.has(otherIndex)) return false;
-        if (other.period !== fight.period) return false;
-        if (other.gameId !== fight.gameId) return false;
 
-        // Make sure it's a different player (prevent self-fights)
-        if (other.player.id === fight.player.id) return false;
+      // First, try to find a match in other ready fights
+      let matchingFight = null;
+      let matchingIndex = -1;
 
-        // Allow fights within pairingWindow seconds of each other to be grouped
+      for (let i = 0; i < readyFights.length; i++) {
+        if (i === index || processed.has(i)) continue;
+
+        const other = readyFights[i].data;
+        if (other.period !== fight.period) continue;
+        if (other.gameId !== fight.gameId) continue;
+        if (other.player.id === fight.player.id) continue;
+
         const otherTime = this.timeToSeconds(other.timeInPeriod);
         const timeDiff = Math.abs(fightTime - otherTime);
-        return timeDiff <= this.pairingWindow;
-      });
+
+        if (timeDiff <= this.pairingWindow) {
+          matchingFight = other;
+          matchingIndex = i;
+          break;
+        }
+      }
+
+      let matchingKey = null;
+
+      // If no match in ready fights, check the pending queue for a potential pair
+      if (!matchingFight && pendingQueue) {
+        for (const [key, data] of pendingQueue.entries()) {
+          // Skip if it's the current fight's key
+          if (key === fightKey) continue;
+
+          const pendingFight = data.penalty;
+
+          // Check if this pending fight should be paired with the ready fight
+          if (pendingFight.period !== fight.period) continue;
+          if (pendingFight.gameId !== fight.gameId) continue;
+          if (pendingFight.player.id === fight.player.id) continue;
+
+          const pendingTime = this.timeToSeconds(pendingFight.timeInPeriod);
+          const timeDiff = Math.abs(fightTime - pendingTime);
+
+          if (timeDiff <= this.pairingWindow) {
+            // Found a match in pending queue! Process them together
+            matchingFight = pendingFight;
+            matchingKey = key;
+            console.log(`      🔗 Pairing ready fight with pending: ${fight.player.name} + ${pendingFight.player.name}`);
+            break;
+          }
+        }
+      }
 
       if (matchingFight) {
-        // Found a matching fight - group them
+        // Found a matching fight - pair them and remove both from queue
         processed.add(index);
-        processed.add(fights.indexOf(matchingFight));
+        if (matchingIndex >= 0) {
+          processed.add(matchingIndex);
+          keysToRemove.push(readyFights[matchingIndex].key);
+        }
+        if (matchingKey) {
+          keysToRemove.push(matchingKey);
+        }
+        keysToRemove.push(fightKey);
+
+        console.log(`      ✅ Fight paired: ${fight.player.name} vs ${matchingFight.player.name}`);
 
         grouped.push({
           ...fight,
@@ -289,14 +342,15 @@ class FightDetector {
           isTwoManFight: true
         });
       } else {
-        // Single fighting penalty
+        // No matching opponent found yet - keep in queue to retry next cycle
         processed.add(index);
-        grouped.push({
-          ...fight,
-          isTwoManFight: false
-        });
+        console.log(`      ⏳ No opponent yet for ${fight.player.name} (waited ${(readyFight.waitTime / 1000).toFixed(1)}s) - keeping in queue`);
+        // DON'T remove from queue - it will retry next cycle
       }
     });
+
+    // Remove successfully paired fights from the pending queue
+    keysToRemove.forEach(key => pendingQueue.delete(key));
 
     return grouped;
   }

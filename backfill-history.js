@@ -13,9 +13,8 @@ async function backfillHistory() {
 
   await storage.initialize();
 
-  // Temporarily set wait period to 0 for backfill (no need to wait for historical fights)
-  const originalWaitPeriod = fightDetector.waitPeriod;
-  fightDetector.waitPeriod = 0;
+  // For backfill, we'll process fights directly without the queue system
+  // Historical fights don't need real-time detection logic
 
   const today = new Date();
   const seasonStart = new Date('2025-10-07'); // Start of 2025-2026 season (Oct 7, 2025)
@@ -56,7 +55,29 @@ async function backfillHistory() {
           await new Promise(resolve => setTimeout(resolve, 200));
 
           const playByPlay = await nhlApi.getPlayByPlay(game.id);
-          const fights = fightDetector.detectFights(playByPlay, storage);
+
+          // Get all fighting penalties directly (no queue needed for historical data)
+          const penalties = playByPlay.plays?.filter(play => play.typeDescKey === 'penalty') || [];
+          const fightPenalties = [];
+
+          penalties.forEach(play => {
+            const isFight = fightDetector.isFightingPenalty(play);
+            if (isFight) {
+              const fightInfo = fightDetector.extractFightInfo(play, playByPlay);
+              fightPenalties.push(fightInfo);
+            }
+          });
+
+          // Also detect roughing fights
+          const roughingFights = fightDetector.detectRoughingFights(penalties, playByPlay);
+          fightPenalties.push(...roughingFights);
+
+          // Group them immediately (no queue, no wait)
+          const fights = fightDetector.groupFights(
+            fightPenalties.map(f => ({ key: `${f.gameId}-${f.eventId}`, data: f, waitTime: 0 })),
+            new Map(), // Empty pending queue
+            Date.now()
+          );
 
           if (fights.length > 0) {
             console.log(`📅 ${dateString} | ${game.awayTeam.abbrev} @ ${game.homeTeam.abbrev}: ${fights.length} fight(s)`);
@@ -101,9 +122,6 @@ async function backfillHistory() {
       console.log(`   Games: ${totalGames} | Fights found: ${totalFights} | New: ${newFights}\n`);
     }
   }
-
-  // Restore original wait period
-  fightDetector.waitPeriod = originalWaitPeriod;
 
   console.log('\n' + '─'.repeat(60));
   console.log('\n✅ Backfill Complete!\n');
