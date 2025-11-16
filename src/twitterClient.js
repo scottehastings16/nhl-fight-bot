@@ -39,10 +39,14 @@ class TwitterClient {
 
   /**
    * Post a tweet
-   * @param {string} text - Tweet text (max 280 characters)
+   * @param {string} text - Tweet text
+   * @param {Object} options - Tweet options
+   * @param {boolean} options.skipCharacterLimit - Skip 280 character limit (for X Premium)
    * @returns {Promise<Object>} Tweet response
    */
-  async tweet(text) {
+  async tweet(text, options = {}) {
+    const { skipCharacterLimit = false } = options;
+
     if (!this.isConfigured) {
       console.log('\n📢 [MOCK TWEET - Twitter not configured]');
       console.log('─'.repeat(60));
@@ -52,8 +56,8 @@ class TwitterClient {
     }
 
     try {
-      // Ensure tweet is under 280 characters
-      if (text.length > 280) {
+      // Ensure tweet is under 280 characters (unless skipCharacterLimit is true)
+      if (!skipCharacterLimit && text.length > 280) {
         text = text.substring(0, 277) + '...';
       }
 
@@ -201,7 +205,37 @@ class TwitterClient {
 
     // Stats summary
     tweet += `\n📅 Week: ${weekCount} | Season: ${seasonTotal}\n\n`;
+
+    // Hashtags - start with base hashtags
     tweet += '#NHLFights #NHL';
+
+    // Collect unique team abbreviations from top fighters and rivalries
+    const teams = new Set();
+
+    // Add teams from top fighters
+    topFighters.slice(0, 5).forEach(fighter => {
+      if (fighter.team) {
+        teams.add(fighter.team);
+      }
+    });
+
+    // Add teams from rivalries
+    topRivalries.slice(0, 3).forEach(rivalry => {
+      if (rivalry.teams) {
+        // rivalry.teams format is like "BOS vs MTL" or "BOS-MTL"
+        const teamAbbrevs = rivalry.teams.split(/\s*(?:vs|[-])\s*/);
+        teamAbbrevs.forEach(team => {
+          if (team && team.length === 3) {
+            teams.add(team.trim());
+          }
+        });
+      }
+    });
+
+    // Add team hashtags
+    teams.forEach(team => {
+      tweet += ` #${this.getTeamHashtag(team)}`;
+    });
 
     return tweet;
   }

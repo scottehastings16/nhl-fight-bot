@@ -347,7 +347,7 @@ class NHLFightsBot {
         seasonTotal
       });
 
-      await twitterClient.tweet(tweetText);
+      await twitterClient.tweet(tweetText, { skipCharacterLimit: true });
       console.log('✅ Daily leaderboard posted successfully\n');
 
     } catch (error) {
