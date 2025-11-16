@@ -246,7 +246,6 @@ class NHLFightsBot {
     console.log(`        Event ID: ${fight.eventId}`);
     console.log(`        Period: ${fight.period} ${fight.periodType}`);
     console.log(`        Time: ${fight.timeInPeriod}`);
-    console.log(`        Score: ${fight.awayTeam} ${fight.awayScore}-${fight.homeScore} ${fight.homeTeam}`);
 
     try {
       // Format and send tweet

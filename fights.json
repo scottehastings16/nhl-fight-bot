@@ -43,7 +43,6 @@
     "2025020160-569",
     "2025020163-25",
     "2025020167-938",
-    "2025020183-714",
     "2025020186-211",
     "2025020187-16",
     "2025020187-471",
@@ -64,9 +63,11 @@
     "2025020254-84",
     "2025020255-86",
     "2025020259-18",
-    "2025020259-20",
     "2025020270-837",
-    "2025020271-38"
+    "2025020271-38",
+    "2025020285-58",
+    "2025020285-113",
+    "2025020290-408"
   ],
   "playerStats": {
     "2025-2026": {
@@ -133,7 +134,7 @@
       "8475842": {
         "name": "Sam Carrick",
         "team": "NYR",
-        "fightCount": 2
+        "fightCount": 3
       },
       "8476312": {
         "name": "Josh Manson",
@@ -193,7 +194,7 @@
       "8477073": {
         "name": "Kurtis MacDermid",
         "team": "OTT",
-        "fightCount": 1
+        "fightCount": 2
       },
       "8477346": {
         "name": "MacKenzie Weegar",
@@ -213,7 +214,7 @@
       "8477507": {
         "name": "Nikita Zadorov",
         "team": "BOS",
-        "fightCount": 1
+        "fightCount": 2
       },
       "8477511": {
         "name": "Anthony Mantha",
@@ -343,12 +344,12 @@
       "8479661": {
         "name": "Tanner Jeannot",
         "team": "BOS",
-        "fightCount": 1
+        "fightCount": 3
       },
       "8479671": {
         "name": "Mathieu Olivier",
         "team": "CBJ",
-        "fightCount": 3
+        "fightCount": 4
       },
       "8479705": {
         "name": "Jeffrey Viel",
@@ -375,6 +376,11 @@
         "team": "TBL",
         "fightCount": 1
       },
+      "8480796": {
+        "name": "Martin Fehérváry",
+        "team": "WSH",
+        "fightCount": 1
+      },
       "8480797": {
         "name": "Joel Farabee",
         "team": "CGY",
@@ -395,6 +401,11 @@
         "team": "TBL",
         "fightCount": 2
       },
+      "8480950": {
+        "name": "Ilya Lyubushkin",
+        "team": "DAL",
+        "fightCount": 1
+      },
       "8481006": {
         "name": "Tyler Tucker",
         "team": "STL",
@@ -403,11 +414,6 @@
       "8481122": {
         "name": "Simon Benoit",
         "team": "TOR",
-        "fightCount": 1
-      },
-      "8481167": {
-        "name": "Brayden Pachal",
-        "team": "CGY",
         "fightCount": 1
       },
       "8481237": {
@@ -428,7 +434,7 @@
       "8481593": {
         "name": "Jayden Struble",
         "team": "MTL",
-        "fightCount": 1
+        "fightCount": 2
       },
       "8481806": {
         "name": "Louis Crevier",
@@ -475,6 +481,11 @@
         "team": "BUF",
         "fightCount": 1
       },
+      "8482702": {
+        "name": "Logan Stankoven",
+        "team": "CAR",
+        "fightCount": 1
+      },
       "8482703": {
         "name": "Colton Dach",
         "team": "CHI",
@@ -493,7 +504,7 @@
       "8482964": {
         "name": "Arber Xhekaj",
         "team": "MTL",
-        "fightCount": 2
+        "fightCount": 4
       },
       "8483531": {
         "name": "Brian Halonen",
@@ -526,251 +537,275 @@
     "2025-2026": {
       "8473422-vs-8478421": {
         "count": 1,
-        "lastFight": "2025-11-12T02:30:49.705Z"
+        "lastFight": "2025-11-16T21:10:24.156Z"
       },
       "8476312-vs-8482408": {
         "count": 1,
-        "lastFight": "2025-11-12T02:30:50.480Z"
+        "lastFight": "2025-11-16T21:10:25.085Z"
       },
       "8477073-vs-8480876": {
         "count": 1,
-        "lastFight": "2025-11-12T02:30:55.098Z"
+        "lastFight": "2025-11-16T21:10:29.343Z"
       },
       "8482131-vs-8482929": {
         "count": 1,
-        "lastFight": "2025-11-12T02:30:55.100Z"
+        "lastFight": "2025-11-16T21:10:29.344Z"
       },
       "8474568-vs-8482408": {
         "count": 1,
-        "lastFight": "2025-11-12T02:31:00.938Z"
+        "lastFight": "2025-11-16T21:10:34.600Z"
       },
       "8479066-vs-8481006": {
         "count": 1,
-        "lastFight": "2025-11-12T02:31:01.383Z"
+        "lastFight": "2025-11-16T21:10:35.023Z"
       },
       "8481806-vs-8482087": {
         "count": 1,
-        "lastFight": "2025-11-12T02:31:05.629Z"
+        "lastFight": "2025-11-16T21:10:38.624Z"
       },
       "8479525-vs-8484829": {
         "count": 1,
-        "lastFight": "2025-11-12T02:31:07.014Z"
+        "lastFight": "2025-11-16T21:10:40.052Z"
       },
       "8471817-vs-8477527": {
         "count": 1,
-        "lastFight": "2025-11-12T02:31:07.870Z"
+        "lastFight": "2025-11-16T21:10:40.949Z"
       },
       "8477018-vs-8477986": {
         "count": 1,
-        "lastFight": "2025-11-12T02:31:08.327Z"
+        "lastFight": "2025-11-16T21:10:41.396Z"
       },
       "8475755-vs-8478136": {
         "count": 1,
-        "lastFight": "2025-11-12T02:31:17.434Z"
+        "lastFight": "2025-11-16T21:10:49.638Z"
       },
       "8480855-vs-8483609": {
         "count": 1,
-        "lastFight": "2025-11-12T02:31:20.210Z"
+        "lastFight": "2025-11-16T21:10:52.467Z"
       },
       "8475842-vs-8482964": {
         "count": 1,
-        "lastFight": "2025-11-12T02:31:30.446Z"
+        "lastFight": "2025-11-16T21:11:02.230Z"
       },
       "8475220-vs-8475235": {
         "count": 1,
-        "lastFight": "2025-11-12T02:31:30.902Z"
+        "lastFight": "2025-11-16T21:11:02.696Z"
       },
       "8479671-vs-8480876": {
         "count": 1,
-        "lastFight": "2025-11-12T02:31:31.363Z"
+        "lastFight": "2025-11-16T21:11:03.142Z"
       },
       "8477446-vs-8479378": {
         "count": 1,
-        "lastFight": "2025-11-12T02:31:32.271Z"
+        "lastFight": "2025-11-16T21:11:03.959Z"
       },
       "8476925-vs-8479066": {
         "count": 1,
-        "lastFight": "2025-11-12T02:31:33.610Z"
+        "lastFight": "2025-11-16T21:11:05.304Z"
       },
       "8478468-vs-8483609": {
         "count": 1,
-        "lastFight": "2025-11-12T02:31:33.612Z"
+        "lastFight": "2025-11-16T21:11:05.306Z"
       },
       "8479520-vs-8483768": {
         "count": 1,
-        "lastFight": "2025-11-12T02:31:34.703Z"
+        "lastFight": "2025-11-16T21:11:06.521Z"
       },
       "8477070-vs-8480355": {
         "count": 1,
-        "lastFight": "2025-11-12T02:31:36.123Z"
+        "lastFight": "2025-11-16T21:11:07.888Z"
       },
       "8479985-vs-8483733": {
         "count": 1,
-        "lastFight": "2025-11-12T02:31:37.095Z"
+        "lastFight": "2025-11-16T21:11:09.100Z"
       },
       "8478439-vs-8479324": {
         "count": 1,
-        "lastFight": "2025-11-12T02:31:37.097Z"
+        "lastFight": "2025-11-16T21:11:09.101Z"
       },
       "8481122-vs-8483531": {
         "count": 1,
-        "lastFight": "2025-11-12T02:31:38.519Z"
+        "lastFight": "2025-11-16T21:11:11.026Z"
       },
       "8479705-vs-8479981": {
         "count": 1,
-        "lastFight": "2025-11-12T02:31:40.260Z"
+        "lastFight": "2025-11-16T21:11:13.317Z"
       },
       "8481006-vs-8482408": {
         "count": 1,
-        "lastFight": "2025-11-12T02:31:40.658Z"
+        "lastFight": "2025-11-16T21:11:13.866Z"
       },
       "8477446-vs-8477527": {
         "count": 1,
-        "lastFight": "2025-11-12T02:31:41.104Z"
+        "lastFight": "2025-11-16T21:11:14.297Z"
       },
       "8478366-vs-8482103": {
         "count": 1,
-        "lastFight": "2025-11-12T02:31:41.107Z"
+        "lastFight": "2025-11-16T21:11:14.299Z"
       },
       "8477527-vs-8479661": {
         "count": 1,
-        "lastFight": "2025-11-12T02:31:44.608Z"
+        "lastFight": "2025-11-16T21:11:18.087Z"
       },
       "8476429-vs-8478891": {
         "count": 1,
-        "lastFight": "2025-11-12T02:31:45.915Z"
+        "lastFight": "2025-11-16T21:11:19.593Z"
       },
       "8471817-vs-8482460": {
         "count": 1,
-        "lastFight": "2025-11-12T02:31:46.359Z"
+        "lastFight": "2025-11-16T21:11:20.029Z"
       },
       "8479378-vs-8483609": {
         "count": 1,
-        "lastFight": "2025-11-12T02:31:51.108Z"
+        "lastFight": "2025-11-16T21:11:24.711Z"
       },
       "8476429-vs-8477903": {
         "count": 1,
-        "lastFight": "2025-11-12T02:31:51.667Z"
+        "lastFight": "2025-11-16T21:11:25.502Z"
       },
       "8479022-vs-8481237": {
         "count": 1,
-        "lastFight": "2025-11-12T02:31:51.669Z"
+        "lastFight": "2025-11-16T21:11:25.504Z"
       },
       "8477527-vs-8482929": {
         "count": 1,
-        "lastFight": "2025-11-12T02:31:52.550Z"
+        "lastFight": "2025-11-16T21:11:26.405Z"
       },
       "8476931-vs-8477949": {
         "count": 1,
-        "lastFight": "2025-11-12T02:31:53.013Z"
+        "lastFight": "2025-11-16T21:11:26.925Z"
       },
       "8476432-vs-8476856": {
         "count": 1,
-        "lastFight": "2025-11-12T02:31:54.854Z"
+        "lastFight": "2025-11-16T21:11:28.777Z"
       },
       "8478434-vs-8482929": {
         "count": 1,
-        "lastFight": "2025-11-12T02:31:58.095Z"
+        "lastFight": "2025-11-16T21:11:32.084Z"
       },
       "8477527-vs-8478421": {
         "count": 1,
-        "lastFight": "2025-11-12T02:32:04.870Z"
+        "lastFight": "2025-11-16T21:11:38.568Z"
       },
       "8474568-vs-8478136": {
         "count": 1,
-        "lastFight": "2025-11-12T02:32:06.371Z"
+        "lastFight": "2025-11-16T21:11:39.839Z"
       },
       "8474612-vs-8475170": {
         "count": 1,
-        "lastFight": "2025-11-12T02:32:06.817Z"
+        "lastFight": "2025-11-16T21:11:40.299Z"
       },
       "8476393-vs-8477479": {
         "count": 1,
-        "lastFight": "2025-11-12T02:32:07.831Z"
+        "lastFight": "2025-11-16T21:11:41.230Z"
       },
       "8475842-vs-8477969": {
         "count": 1,
-        "lastFight": "2025-11-12T02:32:09.255Z"
+        "lastFight": "2025-11-16T21:11:42.722Z"
       },
       "8479591-vs-8481522": {
         "count": 1,
-        "lastFight": "2025-11-12T02:32:11.592Z"
+        "lastFight": "2025-11-16T21:11:45.025Z"
       },
       "8476880-vs-8478413": {
         "count": 1,
-        "lastFight": "2025-11-12T02:32:21.396Z"
+        "lastFight": "2025-11-16T21:11:54.485Z"
       },
       "8480813-vs-8482095": {
         "count": 1,
-        "lastFight": "2025-11-12T02:32:21.902Z"
+        "lastFight": "2025-11-16T21:11:55.006Z"
       },
       "8476393-vs-8481593": {
         "count": 1,
-        "lastFight": "2025-11-12T02:32:21.904Z"
+        "lastFight": "2025-11-16T21:11:55.007Z"
       },
       "8479671-vs-8481006": {
         "count": 1,
-        "lastFight": "2025-11-12T02:32:22.779Z"
+        "lastFight": "2025-11-16T21:11:55.889Z"
       },
       "8475235-vs-8482964": {
         "count": 1,
-        "lastFight": "2025-11-12T02:32:30.744Z"
+        "lastFight": "2025-11-16T21:12:03.232Z"
       },
       "8476455-vs-8480426": {
         "count": 1,
-        "lastFight": "2025-11-12T02:32:32.895Z"
+        "lastFight": "2025-11-16T21:12:05.324Z"
       },
       "8475170-vs-8479520": {
         "count": 1,
-        "lastFight": "2025-11-12T02:32:35.229Z"
+        "lastFight": "2025-11-16T21:12:07.734Z"
       },
       "8481006-vs-8482623": {
         "count": 1,
-        "lastFight": "2025-11-12T02:32:37.548Z"
+        "lastFight": "2025-11-16T21:12:10.179Z"
       },
       "8473533-vs-8475752": {
         "count": 1,
-        "lastFight": "2025-11-12T02:32:38.280Z"
+        "lastFight": "2025-11-16T21:12:10.985Z"
       },
       "8470621-vs-8478421": {
         "count": 1,
-        "lastFight": "2025-11-12T02:32:40.689Z"
+        "lastFight": "2025-11-16T21:12:13.165Z"
       },
       "8474612-vs-8482877": {
         "count": 1,
-        "lastFight": "2025-11-12T02:32:41.251Z"
+        "lastFight": "2025-11-16T21:12:13.840Z"
       },
       "8480797-vs-8482703": {
         "count": 1,
-        "lastFight": "2025-11-12T02:32:42.005Z"
+        "lastFight": "2025-11-16T21:12:14.775Z"
       },
       "8477346-vs-8481568": {
         "count": 1,
-        "lastFight": "2025-11-12T02:32:42.008Z"
+        "lastFight": "2025-11-16T21:12:14.777Z"
       },
       "8473422-vs-8477810": {
         "count": 1,
-        "lastFight": "2025-11-12T02:32:42.009Z"
+        "lastFight": "2025-11-16T21:12:14.779Z"
       },
       "8475455-vs-8477511": {
         "count": 1,
-        "lastFight": "2025-11-12T02:32:43.288Z"
+        "lastFight": "2025-11-16T21:12:15.935Z"
       },
       "8477507-vs-8482259": {
         "count": 1,
-        "lastFight": "2025-11-12T02:32:44.778Z"
+        "lastFight": "2025-11-16T21:12:17.490Z"
       },
       "8478416-vs-8479345": {
         "count": 1,
-        "lastFight": "2025-11-12T02:32:45.669Z"
+        "lastFight": "2025-11-16T21:12:18.387Z"
       },
       "8479365-vs-8479671": {
         "count": 1,
-        "lastFight": "2025-11-12T02:32:54.555Z"
+        "lastFight": "2025-11-16T21:12:26.595Z"
       },
       "8478468-vs-8482131": {
         "count": 1,
-        "lastFight": "2025-11-12T02:32:54.869Z"
+        "lastFight": "2025-11-16T21:12:27.031Z"
+      },
+      "8480796-vs-8482702": {
+        "count": 1,
+        "lastFight": "2025-11-16T21:12:29.157Z"
+      },
+      "8480950-vs-8482964": {
+        "count": 1,
+        "lastFight": "2025-11-16T21:12:34.610Z"
+      },
+      "8477073-vs-8479661": {
+        "count": 1,
+        "lastFight": "2025-11-16T21:12:35.023Z"
+      },
+      "8477507-vs-8481593": {
+        "count": 1,
+        "lastFight": "2025-11-16T21:12:41.131Z"
+      },
+      "8479661-vs-8482964": {
+        "count": 1,
+        "lastFight": "2025-11-16T21:12:41.140Z"
+      },
+      "8475842-vs-8479671": {
+        "count": 1,
+        "lastFight": "2025-11-16T21:12:42.957Z"
       }
     }
   },
@@ -890,9 +925,6 @@
       "BOS-vs-BUF": {
         "fights": 1
       },
-      "CGY-vs-NSH": {
-        "fights": 1
-      },
       "BUF-vs-WSH": {
         "fights": 1
       },
@@ -939,6 +971,21 @@
         "fights": 1
       },
       "FLA-vs-VGK": {
+        "fights": 1
+      },
+      "CAR-vs-WSH": {
+        "fights": 1
+      },
+      "DAL-vs-MTL": {
+        "fights": 1
+      },
+      "BOS-vs-OTT": {
+        "fights": 1
+      },
+      "BOS-vs-MTL": {
+        "fights": 2
+      },
+      "CBJ-vs-NYR": {
         "fights": 1
       }
     }
@@ -1249,7 +1296,7 @@
         ]
       },
       "2025-W43": {
-        "count": 12,
+        "count": 11,
         "fights": [
           {
             "playerIds": [
@@ -1306,13 +1353,6 @@
             ],
             "players": "Michael Eyssimont vs Peyton Krebs",
             "teams": "BUF @ BOS"
-          },
-          {
-            "playerIds": [
-              8481167
-            ],
-            "players": "Brayden Pachal",
-            "teams": "CGY @ NSH"
           },
           {
             "playerIds": [
@@ -1458,7 +1498,7 @@
         ]
       },
       "2025-W46": {
-        "count": 2,
+        "count": 8,
         "fights": [
           {
             "playerIds": [
@@ -1475,6 +1515,54 @@
             ],
             "players": "Donovan Sebrango vs Jeremy Lauzon",
             "teams": "FLA @ VGK"
+          },
+          {
+            "playerIds": [
+              8480796,
+              8482702
+            ],
+            "players": "Martin Fehérváry vs Logan Stankoven",
+            "teams": "WSH @ CAR"
+          },
+          {
+            "playerIds": [
+              8480950,
+              8482964
+            ],
+            "players": "Ilya Lyubushkin vs Arber Xhekaj",
+            "teams": "DAL @ MTL"
+          },
+          {
+            "playerIds": [
+              8477073,
+              8479661
+            ],
+            "players": "Kurtis MacDermid vs Tanner Jeannot",
+            "teams": "BOS @ OTT"
+          },
+          {
+            "playerIds": [
+              8481593,
+              8477507
+            ],
+            "players": "Jayden Struble vs Nikita Zadorov",
+            "teams": "BOS @ MTL"
+          },
+          {
+            "playerIds": [
+              8482964,
+              8479661
+            ],
+            "players": "Arber Xhekaj vs Tanner Jeannot",
+            "teams": "BOS @ MTL"
+          },
+          {
+            "playerIds": [
+              8475842,
+              8479671
+            ],
+            "players": "Sam Carrick vs Mathieu Olivier",
+            "teams": "NYR @ CBJ"
           }
         ]
       }

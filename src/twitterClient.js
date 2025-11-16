@@ -136,12 +136,7 @@ class TwitterClient {
 
     // Game situation
     const periodLabel = this.getPeriodLabel(fight.period, fight.periodType);
-    tweet += `${periodLabel} ${fight.timeInPeriod}`;
-
-    // Score
-    const awayScore = fight.awayScore;
-    const homeScore = fight.homeScore;
-    tweet += ` | ${fight.awayTeam} ${awayScore}-${homeScore} ${fight.homeTeam}\n\n`;
+    tweet += `${periodLabel} ${fight.timeInPeriod}\n\n`;
 
     // Hashtags
     tweet += `#NHLFights #NHL`;
