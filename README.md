@@ -1,6 +1,8 @@
 # NHL Fights Twitter Bot
 
 A Twitter bot that automatically monitors NHL games and tweets whenever a fight occurs.
+(https://x.com/nhl_fight_bot)
+@nhl_fight_bot
 
 ## Features
 
