@@ -99,13 +99,13 @@ class FightDetector {
     for (const [key, data] of this.pendingFights.entries()) {
       const timeSinceFirstSeen = now - data.firstSeenAt;
 
-      if (timeSinceFirstSeen >= this.waitPeriod) {
-        // This fight has been waiting long enough, try to process it
-        readyFights.push({ key, data: data.penalty, waitTime: timeSinceFirstSeen });
-      } else if (timeSinceFirstSeen >= maxWaitTime) {
+      if (timeSinceFirstSeen >= maxWaitTime) {
         // Been waiting too long without finding a pair - give up and remove
         console.log(`      ⏰ Timeout: ${data.penalty.player.name} waited ${(timeSinceFirstSeen / 1000).toFixed(1)}s without finding opponent - removing`);
         this.pendingFights.delete(key);
+      } else if (timeSinceFirstSeen >= this.waitPeriod) {
+        // This fight has been waiting long enough, try to process it
+        readyFights.push({ key, data: data.penalty, waitTime: timeSinceFirstSeen });
       }
     }
 
@@ -292,6 +292,8 @@ class FightDetector {
         if (other.period !== fight.period) continue;
         if (other.gameId !== fight.gameId) continue;
         if (other.player.id === fight.player.id) continue;
+        // Fighters must be on different teams
+        if (other.player.team === fight.player.team) continue;
 
         const otherTime = this.timeToSeconds(other.timeInPeriod);
         const timeDiff = Math.abs(fightTime - otherTime);
@@ -317,6 +319,8 @@ class FightDetector {
           if (pendingFight.period !== fight.period) continue;
           if (pendingFight.gameId !== fight.gameId) continue;
           if (pendingFight.player.id === fight.player.id) continue;
+          // Fighters must be on different teams
+          if (pendingFight.player.team === fight.player.team) continue;
 
           const pendingTime = this.timeToSeconds(pendingFight.timeInPeriod);
           const timeDiff = Math.abs(fightTime - pendingTime);
