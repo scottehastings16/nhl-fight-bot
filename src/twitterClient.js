@@ -1,5 +1,4 @@
 import { TwitterApi } from 'twitter-api-v2';
-import captainsManager from './captains.js';
 
 /**
  * Twitter API Client for posting fight alerts
@@ -99,43 +98,14 @@ class TwitterClient {
   formatFightTweet(fight, gameInfo = {}) {
     let tweet = this.getRandomFightHeading() + '\n\n';
 
-    // Check for captains first to determine if we should abbreviate names
-    const player1IsCaptain = captainsManager.isCaptain(fight.player.id);
-    const player2IsCaptain = fight.opponent ? captainsManager.isCaptain(fight.opponent.id) : false;
-    const hasCaptain = player1IsCaptain || player2IsCaptain;
-
-    // Log captain detection
-    if (player1IsCaptain) {
-      const team = captainsManager.getCaptainTeam(fight.player.id);
-      console.log(`      🎖️  Captain detected: ${fight.player.name} (${team})`);
-    }
-    if (player2IsCaptain) {
-      const team = captainsManager.getCaptainTeam(fight.opponent.id);
-      console.log(`      🎖️  Captain detected: ${fight.opponent.name} (${team})`);
-    }
-
-    // Players involved (abbreviate names if a captain is involved)
-    const player1Name = hasCaptain ? this.abbreviateName(fight.player.name) : fight.player.name;
-    const player2Name = fight.opponent && hasCaptain ? this.abbreviateName(fight.opponent.name) : (fight.opponent ? fight.opponent.name : '');
+    // Players involved
+    const player1Name = fight.player.name;
+    const player2Name = fight.opponent ? fight.opponent.name : '';
 
     if (fight.isTwoManFight && fight.opponent) {
       tweet += `${player1Name} (${fight.player.team}) vs ${player2Name} (${fight.opponent.team})\n\n`;
     } else {
       tweet += `${player1Name} (${fight.player.team})\n\n`;
-    }
-
-    // Add special captain acknowledgment
-    if (player1IsCaptain && player2IsCaptain) {
-      // Both players are captains
-      tweet += '⭐ CAPTAINS FACE OFF! ⭐\n\n';
-    } else if (player1IsCaptain) {
-      // Only player 1 is a captain
-      const teamName = captainsManager.getCaptainTeam(fight.player.id);
-      tweet += `⭐ ${teamName} captain in the fight! ⭐\n\n`;
-    } else if (player2IsCaptain) {
-      // Only player 2 is a captain
-      const teamName = captainsManager.getCaptainTeam(fight.opponent.id);
-      tweet += `⭐ ${teamName} captain in the fight! ⭐\n\n`;
     }
 
     // Game situation
