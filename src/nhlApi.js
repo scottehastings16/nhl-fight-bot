@@ -1,22 +1,54 @@
 import fetch from 'node-fetch';
 
 const NHL_API_BASE = 'https://api-web.nhle.com';
+const MAX_RETRIES = 3;
+const BASE_DELAY_MS = 500;
 
 /**
  * NHL API Client for fetching game data and play-by-play information
  */
 class NHLApi {
   /**
+   * Fetch with automatic retry on 5xx errors and network failures.
+   * Uses exponential backoff: 500ms, 1000ms, 2000ms.
+   */
+  async _fetchWithRetry(url, retries = MAX_RETRIES) {
+    for (let attempt = 0; attempt <= retries; attempt++) {
+      try {
+        const response = await fetch(url);
+
+        if (response.ok) {
+          return await response.json();
+        }
+
+        if (response.status >= 500 && attempt < retries) {
+          const delay = BASE_DELAY_MS * Math.pow(2, attempt);
+          console.warn(`NHL API returned ${response.status} for ${url}, retrying in ${delay}ms (attempt ${attempt + 1}/${retries})`);
+          await new Promise(r => setTimeout(r, delay));
+          continue;
+        }
+
+        throw new Error(`NHL API error: ${response.status} ${response.statusText}`);
+      } catch (error) {
+        const isRetryable = !error.message.startsWith('NHL API error:');
+        if (isRetryable && attempt < retries) {
+          const delay = BASE_DELAY_MS * Math.pow(2, attempt);
+          console.warn(`Network error for ${url}: ${error.message}, retrying in ${delay}ms (attempt ${attempt + 1}/${retries})`);
+          await new Promise(r => setTimeout(r, delay));
+          continue;
+        }
+        throw error;
+      }
+    }
+  }
+
+  /**
    * Get current/today's games with scores
    * @returns {Promise<Object>} Score data including all games for today
    */
   async getCurrentGames() {
     try {
-      const response = await fetch(`${NHL_API_BASE}/v1/score/now`);
-      if (!response.ok) {
-        throw new Error(`NHL API error: ${response.status} ${response.statusText}`);
-      }
-      return await response.json();
+      return await this._fetchWithRetry(`${NHL_API_BASE}/v1/score/now`);
     } catch (error) {
       console.error('Error fetching current games:', error.message);
       throw error;
@@ -30,11 +62,7 @@ class NHLApi {
    */
   async getPlayByPlay(gameId) {
     try {
-      const response = await fetch(`${NHL_API_BASE}/v1/gamecenter/${gameId}/play-by-play`);
-      if (!response.ok) {
-        throw new Error(`NHL API error: ${response.status} ${response.statusText}`);
-      }
-      return await response.json();
+      return await this._fetchWithRetry(`${NHL_API_BASE}/v1/gamecenter/${gameId}/play-by-play`);
     } catch (error) {
       console.error(`Error fetching play-by-play for game ${gameId}:`, error.message);
       throw error;
@@ -48,11 +76,7 @@ class NHLApi {
    */
   async getBoxscore(gameId) {
     try {
-      const response = await fetch(`${NHL_API_BASE}/v1/gamecenter/${gameId}/boxscore`);
-      if (!response.ok) {
-        throw new Error(`NHL API error: ${response.status} ${response.statusText}`);
-      }
-      return await response.json();
+      return await this._fetchWithRetry(`${NHL_API_BASE}/v1/gamecenter/${gameId}/boxscore`);
     } catch (error) {
       console.error(`Error fetching boxscore for game ${gameId}:`, error.message);
       throw error;
